@@ -12,21 +12,25 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  devise_scope :member do
+    post "members/guest_sign_in", to: "members/sessions#guest_sign_in"
+  end
 
 
+  scope module: :public do
+    root to: "homes#top"
 
-  namespace :public do
-    root :to => "homes#top"
+    
     resources :members, only: [:index, :show, :edit, :update, :destroy]
-    resources :posts, only: [:new, :show, :create, :edit, :update, :destroy]
-    resources :comments, only: [:index, :show, :edit, :update, :destroy]
-    resources :groups
+    resources :posts, only: [:index, :show, :create, :edit, :update, :destroy]
+    resources :free_posts, only: [:index, :show, :create, :edit, :update, :destroy]
+    resources :groups, only: [:index, :show, :create, :edit, :update, :destroy]
   end
 
   namespace :admin do
-    root :to => "homes#top"
+    root to: "homes#top"
     resources :members, only: [:index, :show, :destroy]
-    resources :comments, only: [:index, :destroy]
+    resources :free_posts, only: [:index, :show, :destroy]
     resources :groups, only: [:index, :destroy]
   end
 end

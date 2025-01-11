@@ -1,0 +1,16 @@
+<div class="btn-wrapper col-10 mx-auto">
+  <div class="row text-center g-3">
+    <div class="col-12 col-md-3">
+      <%= link_to "ゲストログイン（閲覧用）", members_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block rounded-pill shadow-sm fw-bold sign_in", method: :post %>
+    </div>
+    <div class="col-12 col-md-3">
+      <%= link_to "Log in", member_session_path, class: "btn btn-info btn-sm btn-block rounded-pill shadow-sm fw-bold sign_in" %>
+    </div>
+    <div class="col-12 col-md-3">
+      <%= link_to "Sign Up", new_member_registration_path, class: "btn btn-success btn-sm btn-block rounded-pill shadow-sm fw-bold sign_up" %>
+    </div>
+    <div class="col-12 col-md-3">
+      <%= link_to "Log out", destroy_member_session_path, class: "btn btn-danger btn-sm btn-block rounded-pill shadow-sm fw-bold sign_out", method: :delete %>
+    </div>
+  </div>
+</div>

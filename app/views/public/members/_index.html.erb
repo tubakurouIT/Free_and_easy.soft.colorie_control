@@ -1,0 +1,19 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% free_posts.each do |free_post| %>
+      <tr>
+        <td><%= image_tag free_post.get_profile_image, size: '50x50' %></td>
+        <td><%= free_post.body %></td>
+        
+        <td><%= link_to 'free_post/Show', free_post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

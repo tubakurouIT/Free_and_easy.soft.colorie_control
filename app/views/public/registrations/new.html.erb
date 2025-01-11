@@ -1,29 +1,48 @@
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+<div class="container">
+  <div class="row pt-5">
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+     <%= render "public/shared/error_messages", resource: resource %>
+    <h4><span style="background-color:#eeeeee">新規会員登録</span></h4>
+    <table>
+    <tbody>
+    <tr>
+    <td>名前</td>
+    <td>
+      <%= f.text_field :name, placeholder: "ニックネーム", autocomplete: "name" %>
+    </td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td>
+        <%= f.email_field :email, placeholder: "sample@example.com", autofocus: true, autocomplete: "email" %>
+      </td>
+    </tr>
+      <tr>
+        <td>パスワード(6文字以上)</td>
+        
+        <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+        
+      </tr>
+      <tr>
+        <td>パスワード(確認用)</td>
+        
+        <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+        
+      </tr>
+      
+      <tr>
+       <td><%= f.submit "新規登録", class: "btn btn-success" %></td>
+      </tr>
+    </tbody>
+    </table>
+      <% end %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+  <table>
+    <h4 class="text-left"><span style="background-color:#eeeeee">既に登録済みの方</span></h4>
+    <p><%= link_to "こちら", new_member_session_path %> からログインしてください。</p>
+  </table>

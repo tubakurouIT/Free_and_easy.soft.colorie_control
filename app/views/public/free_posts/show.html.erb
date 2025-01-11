@@ -1,0 +1,38 @@
+<div class='container'>
+  <div class='row'>
+       <div class='col-md-3'>
+          <h2>Member info</h2>
+          <%= render 'public/members/info', member: @member %>
+          <h2 class="mt-3">New free_post</h2>
+          <%= render 'form', free_post: @free_post_new %>
+        </div>
+      <div class='col-md-8 offset-md-1'>
+
+        <div class = 'row'>
+          <h2>free_post detail</h2>
+
+          <table class='table'>
+          <tbody>
+            <tr>
+              <td><%= link_to(@free_post.member) do %>
+                <%= image_tag @free_post.member.get_profile_image, size:"100x100" %><br>
+                <%= @free_post.member.name %>
+                <% end %>
+              </td>
+              
+              <td><%= @free_post.body %></td>
+
+              
+
+                <% if @free_post.member == current_member %>
+                <td><%= link_to 'Edit', edit_free_post_path(@free_post), class: "btn btn-sm btn-success" %></td>
+                <td><%= link_to 'Destroy', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+                <% end %>
+                </tr>
+                </tbody>
+              </table>
+         </div>
+
+      </div>
+  </div>
+</div>
