@@ -3,7 +3,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.all
+    @posts = current_member.posts.all
   end
 
   def show
@@ -25,7 +25,7 @@ class Public::PostsController < ApplicationController
     @post.member_id = current_member.id
     @post.save
     if @post.save
-      redirect_to post_path(@post), notice: "You have created book successfully."
+      redirect_to posts_path, notice: "You have created book successfully."
     else
       @posts = Post.all
       render 'index'

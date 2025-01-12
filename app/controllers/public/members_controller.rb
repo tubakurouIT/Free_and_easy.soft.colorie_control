@@ -2,22 +2,21 @@ class Public::MembersController < ApplicationController
   before_action :ensure_correct_member, only: [ :edit, :update]
   before_action :ensure_guest_member, only: [:edit]
 
-  def index
+  def mypage
     @members = Member.all
     @post = Post.new
-    @posts = Post.all
+    @posts = current_member.posts.limit(3)
     @free_post = FreePost.new
-    @free_posts = FreePost.all
+    @free_posts = current_member.free_posts.limit(3)
   end
 
 
   def show
     #@member = current_member
     @member = Member.find(params[:id])
-    @post = Post.new
-    @posts = Post.all
+    
     @free_post = FreePost.new
-    @free_posts = FreePost.all
+    @free_posts = @member.free_posts.all
   end
 
   def edit

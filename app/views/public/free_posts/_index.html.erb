@@ -1,23 +1,23 @@
 <table class='table table-hover table-inverse'>
   <thead>
     <tr>
-      <th></th>
+      <th>image</th>
       <th>free_posts</th>
-      
-      <th colspan="3"></th>
+      <th>name</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
   <tbody>
     <% free_posts.each do |free_post| %>
       <tr>
-        <td><%= link_to(free_post.member) do %>
-          <%= image_tag free_post.member.get_profile_image, size:'50x50' %>
-          <% end %>
-        </td>
+        <td><%= image_tag free_post.get_image, size:'50x50' %></td>
+        <td><%= link_to free_post.body, free_post_path(free_post) %></td>
+        <td><%= link_to free_post.member.name, member_path(free_post.member_id) %></td>
         
-        <td><%= free_post.body %></td>
-        
-       
+        <% if current_member.id == free_post.member_id %>
+        <td><%= link_to "編集", edit_free_post_path(free_post),class:"btn btn-success" %></td>
+        <td><%= link_to "削除", free_post_path(free_post), method: :delete,class:"btn btn-danger" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

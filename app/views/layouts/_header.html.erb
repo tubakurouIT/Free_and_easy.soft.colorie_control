@@ -1,49 +1,56 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg" style="background-color: #FFE5B4; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);">
     <div class="container">
-      <a class="navbar-brand" href="/"><span>Free_and_easy.soft.calorie_control</span></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand text-primary fw-bold fs-4" href="/">
+        Free and Easy Calorie Control
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-        <% if member_signed_in? %>
-          <li>
-            <%= link_to members_path(current_member),class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> home
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to free_posts_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-users"></i> free_space
-            <% end %>
-          </li>
-          
-          <li>
-            <%= link_to destroy_member_session_path, method: :delete,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-out-alt"></i> log out
-            <% end %>
-          </li>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <% if member_signed_in? %>
+            <li class="nav-item">
+              <%= link_to members_mypage_path, class: 'nav-link text-dark fw-semibold' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
+            </li>
 
-        <% else %>
-          <li>
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> home
-            <% end %>
-          </li>
-          
-          <li>
-            <%= link_to new_member_registration_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-member-plus"></i> signup
-            <% end %>
-          </li>
+            <li class="nav-item">
+              <%= link_to posts_path, class: 'nav-link text-dark fw-semibold' do %>
+                <i class="fa-solid fa-user-tie"></i> my post
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to new_member_session_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-in-alt"></i> login
-            <% end %>
-          </li>
-        <% end %>
+            
+
+            <li class="nav-item">
+              <%= link_to free_posts_path, class: 'nav-link text-dark fw-semibold' do %>
+                <i class="fas fa-users"></i> Free Space
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_member_session_path, method: :delete, class: 'nav-link text-danger fw-semibold' do %>
+                <i class="fas fa-sign-out-alt"></i> Log Out
+              <% end %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to root_path, class: 'nav-link text-dark fw-semibold' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_member_registration_path, class: 'nav-link text-success fw-semibold' do %>
+                <i class="fas fa-user-plus"></i> Sign Up
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_member_session_path, class: 'nav-link text-primary fw-semibold' do %>
+                <i class="fas fa-sign-in-alt"></i> Log In
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>

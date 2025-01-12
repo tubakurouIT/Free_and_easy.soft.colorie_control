@@ -11,25 +11,46 @@
     <div class = 'row'>
   		<h2>Post detail</h2>
 
-  		<table class='table'>
-        <tbody>
-            <tr>
-              <td><%= link_to(@post.member) do %>
-                <%= image_tag @post.member.get_profile_image, size:"100x100" %><br>
-                <%= @post.member.name %>
-                <% end %>
-              </td>
-              <td><%= link_to @post.title, @post %></td>
-              <td><%= @post.body %></td>
+  		<table class="table table-bordered table-striped">
+  <tbody>
+    <!-- 投稿者情報 -->
+    <tr>
+      <td class="text-center" style="width: 200px;">
+        <%= link_to(@post.member) do %>
+          <%= image_tag @post.get_image, class: "img-thumbnail mb-2", size: "300x300" %><br>
+          <strong><%= @post.member.name %></strong>
+        <% end %>
+      </td>
+    </tr>
+
+    <!-- 投稿タイトル -->
+    <tr>
+      <td>
+        <h5 class="text-primary"><%= link_to @post.title, @post, class: "text-decoration-none" %></h5>
+      </td>
+    </tr>
+
+    <!-- 投稿内容 -->
+    <tr>
+      <td>
+        <p class="text-muted"><%= @post.body %></p>
+      </td>
+    </tr>
+
+    <!-- 編集・削除ボタン -->
+    <% if @post.member == current_member %>
+      <tr>
+        <td class="text-end">
+          <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-outline-success me-2" %>
+          <%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 
-              <% if @post.member == current_member %>
-              <td><%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-success" %></td>
-              <td><%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-              <% end %>
-            </tr>
-        </tbody>
-      </table>
+
    </div>
 
             

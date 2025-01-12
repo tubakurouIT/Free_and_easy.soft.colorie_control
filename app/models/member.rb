@@ -21,6 +21,10 @@ class Member < ApplicationRecord
     end
   end
   
+  def guest_member?
+    email == GUEST_MEMBER_EMAIL
+  end
+
   #退会済みのユーザーを判別
   def active_for_authentication?
     super && (is_active == true)

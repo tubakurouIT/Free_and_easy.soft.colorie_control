@@ -4,6 +4,7 @@ class Public::FreePostsController < ApplicationController
   def index
     @free_post = FreePost.new
     @free_posts =FreePost.all
+    
   end
 
   def show
@@ -18,7 +19,7 @@ class Public::FreePostsController < ApplicationController
     @free_post =FreePost.new(free_posts_params)
     @free_post.member_id = current_member.id
     if @free_post.save
-      redirect_to free_post_path(@free_post), notice: "You have created book successfully."
+      redirect_to free_posts_path, notice: "You have created book successfully."
     else
       @free_posts =FreePost.all
       render 'index'
@@ -36,8 +37,8 @@ class Public::FreePostsController < ApplicationController
   def update
     is_matching_login_user
     @free_post = FreePost.find(params[:id])
-    if @free_post.update(free_post_params)
-      redirect_to free_post_path(@free_post), notice: "You have updated book successfully."
+    if @free_post.update(free_posts_params)
+      redirect_to free_posts_path(@free_post), notice: "You have updated book successfully."
     else
       render "edit"
     end

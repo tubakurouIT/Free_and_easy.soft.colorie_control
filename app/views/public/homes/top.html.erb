@@ -1,16 +1,44 @@
+<!-- ボタン群 -->
 <div class="btn-wrapper col-10 mx-auto">
   <div class="row text-center g-3">
+    <!-- ゲストログイン -->
     <div class="col-12 col-md-3">
-      <%= link_to "ゲストログイン（閲覧用）", members_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block rounded-pill shadow-sm fw-bold sign_in", method: :post %>
+      <%= link_to "ゲストログイン（閲覧用）", members_guest_sign_in_path, 
+        class: "btn btn-secondary btn-sm btn-block rounded-pill shadow-sm fw-bold sign_in", method: :post %>
     </div>
+    <!-- ログイン -->
     <div class="col-12 col-md-3">
-      <%= link_to "Log in", member_session_path, class: "btn btn-info btn-sm btn-block rounded-pill shadow-sm fw-bold sign_in" %>
+      <%= link_to "Log in", member_session_path, 
+        class: "btn btn-info btn-sm btn-block rounded-pill shadow-sm fw-bold sign_in" %>
     </div>
+    <!-- サインアップ -->
     <div class="col-12 col-md-3">
-      <%= link_to "Sign Up", new_member_registration_path, class: "btn btn-success btn-sm btn-block rounded-pill shadow-sm fw-bold sign_up" %>
+      <%= link_to "Sign Up", new_member_registration_path, 
+        class: "btn btn-success btn-sm btn-block rounded-pill shadow-sm fw-bold sign_up" %>
     </div>
+    <!-- ログアウト -->
     <div class="col-12 col-md-3">
-      <%= link_to "Log out", destroy_member_session_path, class: "btn btn-danger btn-sm btn-block rounded-pill shadow-sm fw-bold sign_out", method: :delete %>
+      <%= link_to "Log out", destroy_member_session_path, 
+        class: "btn btn-danger btn-sm btn-block rounded-pill shadow-sm fw-bold sign_out", method: :delete %>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5">
+  <!-- トップ画像 -->
+  <div class="row mb-4">
+    <div class="col-12 text-center">
+      <!-- コメントを画像の上部に移動 -->
+      <div style="background-color: white; padding: 10px; width: 70%; margin: 0 auto;">
+        <p>
+          ようこそ、自由気ままな、なんちゃって、カロリーコントロールの世界へ<br>
+          このサイトは、日記のように食べたものを記録することで、可視化できるようになります。<br>
+          マイページは他者からの閲覧はできませんので、人目を気にする事なくご自由にお使いいただけます。<br>
+          フリースペースで情報の交換もできますので、併せてご利用ください。<br>
+          皆様のお役に立てれば、幸いでございます。
+        </p>
+      </div>
+      <%= image_tag("top.jpg", class: "img-fluid rounded shadow-lg", alt: "Top Image") %>
     </div>
   </div>
 </div>

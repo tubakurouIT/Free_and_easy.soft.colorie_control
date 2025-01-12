@@ -1,3 +1,15 @@
+
+<% if @member.errors.any? %>
+   <%= @member.errors.count %>件のエラーが発生しました
+   <ul>
+      <% @member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+   </ul>
+<% end %>
+
+
+
 <div class="container">
    <h4 class="my-5"><span style="background-color:#eeeeee">会員情報編集</span></h4>
 </div>

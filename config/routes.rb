@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
 
-    
-    resources :members, only: [:index, :show, :edit, :update, :destroy]
+    get 'members/mypage', to: 'members#mypage'
+    resources :members, only: [:show, :edit, :update, :destroy]
     resources :posts, only: [:index, :show, :create, :edit, :update, :destroy]
     resources :free_posts, only: [:index, :show, :create, :edit, :update, :destroy]
     resources :groups, only: [:index, :show, :create, :edit, :update, :destroy]
