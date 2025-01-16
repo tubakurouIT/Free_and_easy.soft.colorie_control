@@ -1,5 +1,6 @@
 class Public::FreePostsController < ApplicationController
   before_action :authenticate_member!
+  before_action :is_matching_login_member, except: [:index, :create]
 
   def index
     @free_post = FreePost.new
@@ -56,10 +57,10 @@ class Public::FreePostsController < ApplicationController
   end
 
 
-  def is_matching_login_user
+  def is_matching_login_member
     free_post = FreePost.find(params[:id])
     unless free_post.member.id == current_member.id
-      redirect_to free_post_path(free_post)
+      redirect_to free_posts_path
     end
   end
 end

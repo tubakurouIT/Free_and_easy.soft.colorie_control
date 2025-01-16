@@ -1,6 +1,7 @@
 class Public::MembersController < ApplicationController
   before_action :ensure_correct_member, only: [ :edit, :update]
   before_action :ensure_guest_member, only: [:edit]
+  before_action :authenticate_member!
 
   def mypage
     @members = Member.all
@@ -29,7 +30,7 @@ class Public::MembersController < ApplicationController
     #@member = current_member
     if @member.update(member_params)
       flash[:notice] = "会員情報を編集しました。"
-    redirect_to members_path(@member), notice: "You have updated user successfully."
+    redirect_to members_mypage_path, notice: "You have updated user successfully."
     else
       render 'edit'
     end
@@ -52,7 +53,7 @@ class Public::MembersController < ApplicationController
   def ensure_correct_member
     @member = Member.find(params[:id])
     unless @member == current_member
-      redirect_to member_path(current_member)
+      redirect_to members_mypage_path
     end
   end
 

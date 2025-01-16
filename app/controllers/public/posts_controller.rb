@@ -1,5 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_member!
+  before_action :is_matching_login_member, except: [:index, :create]
+ 
 
   def index
     @post = Post.new
@@ -15,7 +17,7 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    is_matching_login_member
+   
     @post = Post.find(params[:id])
   end
 
@@ -33,10 +35,10 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    is_matching_login_member
+    
     @post = Post.find(params[:id])
     if @post.update(posts_params)
-      redirect_to post_path(@post), notice: "You have updated book successfully."
+      redirect_to posts_path, notice: "You have updated book successfully."
     else
       render "edit"
     end
@@ -57,7 +59,7 @@ class Public::PostsController < ApplicationController
   def is_matching_login_member
     post = Post.find(params[:id])
     unless post.member.id == current_member.id
-      redirect_to post_path(post)
+      redirect_to posts_path
     end
   end
 

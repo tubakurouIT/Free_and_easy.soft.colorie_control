@@ -1,19 +1,27 @@
-<%= form_with model:post,local:true do |f| %>
-  <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control post_title' %>
-  </div>
+<% unless current_member.email == "guest@example.com" %>
+  <h2 class="mt-3">New Post</h2>
+  <%= form_with model:post,local:true do |f| %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control post_title' %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :image %>
-    <%= f.file_field :image, class: "form-control-file post_image", accept: 'image/*' %></td>
-  </div>
+    <div class="form-group">
+      <%= f.label :image %>
+      <%= f.file_field :image, class: "form-control-file post_image", accept: 'image/*' %></td>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: 'form-control post_body' %>
-  </div>
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %>
-  </div>
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, class: 'form-control post_body' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.submit class: 'btn btn-success' %>
+      <% if post.id %>
+      <%= link_to "削除", post_path(post), method: :delete,class:"btn btn-danger" %>
+      <% end %>
+    </div>
+    
+  <% end %>
 <% end %>
