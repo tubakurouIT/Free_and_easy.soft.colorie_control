@@ -18,7 +18,7 @@
     
     <div class="form-group">
       <%= f.submit class: 'btn btn-success' %>
-      <% if post.id %>
+      <% if post.present? && post.id %>
       <%= link_to "削除", post_path(post), method: :delete,class:"btn btn-danger" %>
       <% end %>
     </div>

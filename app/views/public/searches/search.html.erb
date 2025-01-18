@@ -1,0 +1,7 @@
+<% if @model == 'member' %>
+    <h3>Members search for "<%= @content %>"</h3>
+  <%= render 'public/members/index', members: @records %>
+<% elsif @model == 'free_post' %>
+    <h3>FreePosts search for "<%= @content %>"</h3>
+  <%= render 'public/free_posts/index', free_posts: @records %>
+<% end %>

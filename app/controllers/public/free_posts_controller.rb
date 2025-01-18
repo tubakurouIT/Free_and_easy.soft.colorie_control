@@ -1,6 +1,6 @@
 class Public::FreePostsController < ApplicationController
   before_action :authenticate_member!
-  before_action :is_matching_login_member, except: [:index, :create]
+  before_action :is_matching_login_member, except: [:index, :create, :show]
 
   def index
     @free_post = FreePost.new
@@ -12,6 +12,8 @@ class Public::FreePostsController < ApplicationController
     @free_post = FreePost.find(params[:id])
     @member = @free_post.member
     @free_post_new = FreePost.new
+    @comment = Comment.new
+    
   end
 
 
@@ -29,14 +31,12 @@ class Public::FreePostsController < ApplicationController
 
 
   def edit
-    is_matching_login_user
     @free_post = FreePost.find(params[:id])
   end
 
   
 
   def update
-    is_matching_login_user
     @free_post = FreePost.find(params[:id])
     if @free_post.update(free_posts_params)
       redirect_to free_posts_path(@free_post), notice: "You have updated book successfully."

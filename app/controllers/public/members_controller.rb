@@ -3,6 +3,13 @@ class Public::MembersController < ApplicationController
   before_action :ensure_guest_member, only: [:edit]
   before_action :authenticate_member!
 
+  def index
+    @members = Member.all
+    @member = Member.new
+  
+  end
+
+
   def mypage
     @members = Member.all
     @post = Post.new

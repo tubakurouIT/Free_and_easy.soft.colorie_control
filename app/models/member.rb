@@ -10,7 +10,7 @@ class Member < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :free_posts, dependent: :destroy
-
+  has_many :comments, dependent: :destroy
   GUEST_MEMBER_EMAIL = "guest@example.com"
 
   def self.guest
@@ -32,6 +32,18 @@ class Member < ApplicationRecord
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
+  end
+
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Member.where(name: content)
+    elsif method == 'forward'
+      Member.where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      Member.where('name LIKE ?', '%' + content)
+    else
+      Member.where('name LIKE ?', '%' + content + '%')
+    end
   end
 
 end
