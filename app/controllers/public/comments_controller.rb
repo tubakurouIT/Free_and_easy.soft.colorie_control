@@ -1,12 +1,24 @@
 class Public::CommentsController < ApplicationController
+  before_action :authenticate_member!
+
 
   def create
-    free_post = FreePost.find(params[:free_post_id])
-    comment = Comment.new(comment_params)
-    comment.member_id = current_member.id
-    comment.free_post_id = free_post.id
-    comment.save
-    redirect_to free_post_path(free_post)
+    @free_post = FreePost.find(params[:free_post_id])
+    @comment = Comment.new(comment_params)
+    @comment.member_id = current_member.id
+    @comment.free_post_id = @free_post.id
+  if @comment.save
+    redirect_to free_post_path(@free_post), notice: "successfully"
+  else
+
+    flash[:notice] = "コメントに失敗しました。"
+    @member = @free_post.member
+    @free_post_new = FreePost.new
+    
+    render 'public/free_posts/show'
+  
+  end
+
   end
 
 

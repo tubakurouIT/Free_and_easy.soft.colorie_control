@@ -1,9 +1,14 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-3">
       <h2>Member info</h2>
       <%= render 'public/members/info', member: @member %>
-      <%= render 'form', free_post: @free_post_new %>
+      <%= render 'public/free_posts/form', free_post: @free_post_new %>
     </div>
 
     <div class="col-md-8 offset-md-1">

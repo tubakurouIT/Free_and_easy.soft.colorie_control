@@ -22,7 +22,7 @@ class Public::FreePostsController < ApplicationController
     @free_post =FreePost.new(free_posts_params)
     @free_post.member_id = current_member.id
     if @free_post.save
-      redirect_to free_posts_path, notice: "You have created book successfully."
+      redirect_to free_posts_path, notice: "successfully"
     else
       @free_posts =FreePost.all
       render 'index'

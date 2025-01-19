@@ -3,8 +3,9 @@ class Admin::CommentsController < ApplicationController
   layout 'admin'
 
   def destroy
+    free_post_id = Comment.find(params[:id]).free_post_id
     Comment.find(params[:id]).destroy
-    redirect_to admin_free_post_path(params[:free_post_id])
+    redirect_to admin_free_post_path(free_post_id)
   end
 
 end
