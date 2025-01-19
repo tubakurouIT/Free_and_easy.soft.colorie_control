@@ -1,0 +1,74 @@
+<div class="container mt-4">
+  <% if @model == 'member' %>
+    <div class="text-center mb-4">
+      <h3 class="text-primary">Members search for "<%= @content %>"</h3>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col" class="text-center">Image</th>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @records.each do |member| %>
+            <tr>
+              <td class="text-center">
+                <%= image_tag member.get_profile_image, size: '50x50', class: 'rounded-circle' %>
+              </td>
+              <td class="text-center">
+                <%= link_to member.name, member_path(member), class: "text-decoration-none text-dark fw-bold" %>
+              </td>
+              <td class="text-center">
+                <%= link_to "削除", admin_member_path(member), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  <% elsif @model == 'free_post' %>
+    <div class="text-center mb-4">
+      <h3 class="text-success">FreePosts search for "<%= @content %>"</h3>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col" class="text-center">Image</th>
+            <th scope="col" class="text-center">Free Posts</th>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">Comments</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @records.each do |free_post| %>
+            <tr>
+              <td class="text-center">
+                <%= image_tag free_post.get_image, size: '50x50', class: 'rounded-circle' %>
+              </td>
+              <td>
+                <%= link_to free_post.body, free_post_path(free_post), class: "text-decoration-none text-dark" %>
+              </td>
+              <td class="text-center">
+                <%= link_to free_post.member.name, member_path(free_post.member_id), class: "text-decoration-none text-dark fw-bold" %>
+              </td>
+              <td class="text-center">
+                <%= link_to "#{free_post.comments.count} コメント", free_post_path(free_post.id), class: "btn btn-info btn-sm text-white" %>
+              </td>
+              <td class="text-center">
+                <%= link_to "削除", free_post_path(free_post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,43 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+          <h2 class="h5 mb-0">Members</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Introduction</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @members.each do |member| %>
+                  <tr>
+                    <td>
+                      <%= image_tag(member.get_profile_image, size: '50x50', class: "rounded-circle", alt: "#{member.name}'s profile image") %>
+                    </td>
+                    <td>
+                      <%= link_to(member.name, admin_member_path(member), class: "text-decoration-none fw-bold text-primary") %>
+                    </td>
+                    <td><%= member.introduction %></td>
+                    <td><%= member.email %></td>
+                    <td>
+                      <%= link_to "削除", admin_member_path(member), method: :delete,"data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

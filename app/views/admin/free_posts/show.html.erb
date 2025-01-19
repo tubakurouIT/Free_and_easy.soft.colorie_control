@@ -1,0 +1,83 @@
+<div class="container my-5">
+  <div class="row">
+    <!-- メンバー情報セクション -->
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-4">Member Info</h5>
+          <div class="mb-3">
+            <%= image_tag @member.get_profile_image, size: '120x120', fallback: 'no_image.jpg', class: 'rounded-circle border' %>
+          </div>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th scope="row" class="text-muted text-start">Name</th>
+                <td class="text-start"><%= @member.name %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-muted text-start">Introduction</th>
+                <td class="text-start"><%= @member.introduction %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- フリーポスト詳細セクション -->
+    <div class="col-lg-8">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Free Post Detail</h5>
+          <table class="table table-borderless align-middle">
+            <tbody>
+              <tr>
+                <td class="text-center" style="width: 15%;">
+                  <%= image_tag @free_post.member.get_profile_image, size: '80x80', class: 'rounded-circle border' %>
+                </td>
+                <td style="width: 25%;">
+                  <strong><%= @free_post.member.name %></strong>
+                </td>
+                <td style="width: 40%;">
+                  <p class="mb-0"><%= @free_post.body %></p>
+                </td>
+                <td class="text-end" style="width: 20%;">
+                  <%= link_to '削除', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-sm btn-danger' %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- コメントセクション -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">コメント一覧</h5>
+          <p class="text-muted">コメント件数：<%= @free_post.comments.count %></p>
+          <table class="table table-hover align-middle">
+            <tbody>
+              <% @free_post.comments.each do |comment| %>
+                <tr>
+                  <td class="text-center" style="width: 10%;">
+                    <%= image_tag comment.member.get_profile_image, size: '50x50', class: 'rounded-circle border' %>
+                  </td>
+                  <td style="width: 65%;">
+                    <strong><%= comment.member.name %></strong><br>
+                    <small class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d') %></small><br>
+                    <%= comment.comment %>
+                  </td>
+                  <td class="text-end" style="width: 25%;">
+                   
+                      <%= link_to '削除', free_post_comment_path(comment.free_post, comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-sm btn-danger' %>
+              
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
