@@ -32,9 +32,11 @@ Rails.application.routes.draw do
   
 
   namespace :admin do
-    root to: "homes#top"
+    root "members#index" 
+    get "/search", to: "searches#search"
     resources :members, only: [:index, :show, :destroy]
     resources :free_posts, only: [:index, :show, :destroy]
     resources :groups, only: [:index, :destroy]
+    resources :comments, only: [:destroy]
   end
 end

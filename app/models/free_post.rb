@@ -15,7 +15,7 @@ class FreePost < ApplicationRecord
    
     def self.search_for(content, method)
       if method == 'perfect'
-        FreePost.where(title: content)
+        FreePost.where(body: content)
       elsif method == 'forward'
         FreePost.where('body LIKE ?', content + '%')
       elsif method == 'backward'
