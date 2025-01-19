@@ -1,36 +1,36 @@
 <!-- ボタン群 -->
-<div class="btn-wrapper col-10 mx-auto">
-  <div class="row text-center g-3">
+<div class="container py-4">
+  <div class="row text-center justify-content-center g-3">
     <!-- ゲストログイン -->
     <div class="col-12 col-md-3">
       <%= link_to "ゲストログイン（閲覧用）", members_guest_sign_in_path, 
-        class: "btn btn-secondary btn-sm btn-block rounded-pill shadow-sm fw-bold sign_in", method: :post %>
+        class: "btn btn-secondary btn-block rounded-pill shadow-sm fw-bold", method: :post %>
     </div>
     <!-- ログイン -->
     <div class="col-12 col-md-3">
       <%= link_to "Log in", member_session_path, 
-        class: "btn btn-info btn-sm btn-block rounded-pill shadow-sm fw-bold sign_in" %>
+        class: "btn btn-info btn-block rounded-pill shadow-sm fw-bold" %>
     </div>
     <!-- サインアップ -->
     <div class="col-12 col-md-3">
       <%= link_to "Sign Up", new_member_registration_path, 
-        class: "btn btn-success btn-sm btn-block rounded-pill shadow-sm fw-bold sign_up" %>
+        class: "btn btn-success btn-block rounded-pill shadow-sm fw-bold" %>
     </div>
     <!-- ログアウト -->
     <div class="col-12 col-md-3">
       <%= link_to "Log out", destroy_member_session_path, 
-        class: "btn btn-danger btn-sm btn-block rounded-pill shadow-sm fw-bold sign_out", method: :delete %>
+        class: "btn btn-danger btn-block rounded-pill shadow-sm fw-bold", method: :delete %>
     </div>
   </div>
 </div>
 
 <div class="container py-5">
-  <!-- トップ画像 -->
-  <div class="row mb-4">
-    <div class="col-12 text-center">
-      <!-- コメントを画像の上部に移動 -->
-      <div style="background-color: white; padding: 10px; width: 70%; margin: 0 auto;">
-        <p>
+  <!-- トップ画像とメッセージ -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-12 col-lg-10 text-center">
+      <!-- コメントを綺麗に整形 -->
+      <div class="bg-white p-4 rounded shadow-sm">
+        <p class="mb-0">
           ようこそ、自由気ままな、なんちゃって、カロリーコントロールの世界へ<br>
           このサイトは、日記のように食べたものを記録することで、可視化できるようになります。<br>
           マイページは他者からの閲覧はできませんので、人目を気にする事なくご自由にお使いいただけます。<br>
@@ -38,7 +38,13 @@
           皆様のお役に立てれば、幸いでございます。
         </p>
       </div>
-      <%= image_tag("top.jpg", class: "img-fluid rounded shadow-lg", alt: "Top Image") %>
+    </div>
+  </div>
+
+  <!-- トップ画像 -->
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 text-center">
+      <%= image_tag("top.jpg", class: "img-fluid rounded shadow-lg smaller-image", alt: "Top Image") %>
     </div>
   </div>
 </div>
