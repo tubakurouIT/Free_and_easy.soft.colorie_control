@@ -16,12 +16,22 @@
     <div class='col-md-3'>
       <h2>Member info</h2>
       <%= render 'public/members/info', member: current_member %>
-      
+      <h2 class="mt-3">New free_post</h2>
       <%= render 'form', free_post: @free_post %>
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Free_posts</h2>
+
+      <% unless current_member.email == "guest@example.com" %>
+      <%= link_to "グループを作成する", new_group_path %>｜<%= link_to "グループ一覧", groups_path %>
+      <% end %>
+
       <%= render 'index', free_posts: @free_posts %>
+
+      <h2>Groups</h2>
+     <%= render 'group_index', free_posts: @group_free_posts %>
+
+     
     </div>
   </div>
 </div>

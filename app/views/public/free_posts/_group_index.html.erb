@@ -1,12 +1,9 @@
 
-<div class="d-flex justify-content-center mb-2">
-  <%= render "public/searches/form" %>
-</div>
-
 <table class='table table-hover table-inverse'>
   <thead>
     <tr>
       <th>image</th>
+      <th>group</th>
       <th>free_posts</th>
       <th>name</th>
       <th colspan="2"></th>
@@ -16,6 +13,7 @@
     <% free_posts.each do |free_post| %>
       <tr>
         <td><%= image_tag free_post.get_image, size:'50x50' %></td>
+        <td><%= free_post.group.name %></td>
         <td><%= link_to free_post.body, free_post_path(free_post) %></td>
         <td><%= link_to free_post.member.name, member_path(free_post.member_id) %></td>
         <td><%= link_to "#{free_post.comments.count} コメント", free_post_path(free_post.id) %></p>
@@ -28,5 +26,4 @@
     <% end %>
   </tbody>
 </table>
-
-<%= paginate @free_posts %>
+<%= paginate @group_free_posts, param_name: :group_page %>

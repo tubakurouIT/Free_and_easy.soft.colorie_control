@@ -35,6 +35,12 @@
             </li>
 
             <li class="nav-item">
+              <%= link_to groups_path, class: 'nav-link text-dark fw-semibold' do %>
+                <i class="fa-solid fa-people-group"></i> groups
+              <% end %>
+            </li>
+
+            <li class="nav-item">
               <%= link_to destroy_member_session_path, method: :delete, class: 'nav-link text-danger fw-semibold' do %>
                 <i class="fas fa-sign-out-alt"></i> Log Out
               <% end %>

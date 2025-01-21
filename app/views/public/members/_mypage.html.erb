@@ -49,7 +49,34 @@
       </tr>
     <% end %>
     <td>
-      <%= link_to "一覧へ", free_posts_path %>
+      <%= link_to "一覧へ", member_path(current_member) %>
     </td>
 </tbody>
+</table>
+
+
+<h2>groups</h2>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col" colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% groups.each do |group| %>
+      <tr>
+        <td><%= image_tag group.get_group_image, size: "50x50" %></td>
+        <td><%= link_to group.name, group_path(group) %></td>
+        <td><%= group.members.count %></td>
+        <td>
+          <%= link_to 'Show', group, class: 'btn btn-primary btn-sm' %>
+        </td>
+      </tr>
+   <% end %>
+      <td>
+        <%= link_to "一覧へ", groups_path %>
+      </td>
+  </tbody>
 </table>

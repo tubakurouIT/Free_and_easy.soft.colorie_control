@@ -1,0 +1,55 @@
+<div class="container px-5 px-sm-0">
+  <%= render 'layouts/errors', obj: @free_post %>
+  <div class="row">
+
+    <div class="col-md-3">
+      <h2>Member info</h2>
+      <%= render partial: "public/members/info", locals: { member: @member }%>
+      
+      <%= render partial: "public/free_posts/form", locals: { free_post: @free_post } %>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Group Detail</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th></th>
+            <th>グループ名</th>
+            <th>紹介文</th>
+            <th>メンバー</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= image_tag @group.get_group_image, size: "50x50" %></td>
+            <td><%= @group.name %></td>
+            <td><%= @group.introduction %></td>
+            <td>
+              <% @group.members.each do |member| %>
+                <li style="list-style:none;"><%= member.name %></li>
+              <% end %>
+            </td>
+            <td>
+              <% if @group.owner_id == current_member.id %>
+                <%= link_to "Edit", edit_group_path(@group), class: "btn btn-success" %>
+                <%#= link_to "グループを削除", group_path(group), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %>
+              <% elsif current_member.email == "guest@example.com" %>
+
+              <% else %>
+                <% if @group.include_member?(current_member) %>
+                  <%= link_to "Leave this group", group_group_members_path(@group), method: :delete, class: "btn btn-danger" %>
+                <% else %>
+                  <%= link_to "Join this group", group_group_members_path(@group), method: :post, class: "btn btn-success" %>
+                <% end %>
+              <% end %>
+             
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
