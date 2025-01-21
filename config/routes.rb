@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'groups/new'
+    get 'groups/index'
+    get 'groups/show'
+    get 'groups/edit'
+    get 'groups/create'
+    get 'groups/update'
+    get 'groups/destroy'
+  end
   # 顧客用
   # URL /members/sign_in ...
   devise_for :members,skip: [:passwords], controllers: {
@@ -26,7 +35,9 @@ Rails.application.routes.draw do
     resources :free_posts, only: [:index, :show, :create, :edit, :update, :destroy] do
       resources :comments, only: [:create, :destroy]
     end
-    resources :groups, only: [:index, :show, :create, :edit, :update, :destroy]
+    resources :groups, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
+      resource :group_members, only: [:create, :destroy]
+    end
   end
 
   

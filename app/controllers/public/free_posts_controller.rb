@@ -3,9 +3,12 @@ class Public::FreePostsController < ApplicationController
   before_action :is_matching_login_member, except: [:index, :create, :show]
 
   def index
+   
     @free_post = FreePost.new
-    @free_posts =FreePost.all
-    
+    @free_posts =FreePost.page(params[:page]).per(7)
+    @groups = Group.all
+    current_member_group_ids = current_member.groups.ids
+    @group_free_posts = FreePost.where(group_id: current_member_group_ids).page(params[:group_page]).per(3)
   end
 
   def show
@@ -53,7 +56,7 @@ class Public::FreePostsController < ApplicationController
 
   private
   def free_posts_params
-    params.require(:free_post).permit(:body, :image)
+    params.require(:free_post).permit(:body, :image, :group_id)
   end
 
 
