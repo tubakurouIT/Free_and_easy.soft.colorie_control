@@ -24,7 +24,7 @@
                 <% end %>
               </td>
               <td><%= @free_post.body %></td>
-
+              <td><%= render "public/favorites/btn", free_post: @free_post %></td>
               <% if @free_post.member == current_member %>
                 <td><%= link_to 'Edit', edit_free_post_path(@free_post), class: "btn btn-sm btn-success" %></td>
                 <td>
