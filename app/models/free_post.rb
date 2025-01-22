@@ -7,6 +7,12 @@ class FreePost < ApplicationRecord
   belongs_to :member
   belongs_to :group, optional: true
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+
+  def favorited_by?(member)
+    favorites.exists?(member_id: member.id)
+  end
+
   def get_image
     (image.attached?) ? image : 'no_image.jpg'
   end

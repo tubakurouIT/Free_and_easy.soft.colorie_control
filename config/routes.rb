@@ -30,10 +30,16 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "/search", to: "searches#search"
     get 'members/mypage', to: 'members#mypage'
-    resources :members, only: [:index, :show, :edit, :update, :destroy]
+    resources :members, only: [:index, :show, :edit, :update, :destroy] do
+      member do
+        get :favorites
+      end
+    end
+
     resources :posts, only: [:index, :show, :create, :edit, :update, :destroy]
     resources :free_posts, only: [:index, :show, :create, :edit, :update, :destroy] do
       resources :comments, only: [:create, :destroy]
+      resource:favorites, only: [:create, :destroy]
     end
     resources :groups, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
       resource :group_members, only: [:create, :destroy]

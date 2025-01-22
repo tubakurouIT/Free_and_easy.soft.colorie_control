@@ -34,7 +34,7 @@
             <td>
               <% if @group.owner_id == current_member.id %>
                 <%= link_to "Edit", edit_group_path(@group), class: "btn btn-success" %>
-                <%#= link_to "グループを削除", group_path(group), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %>
+                <%= link_to "グループを削除", group_path(group), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %>
               <% elsif current_member.email == "guest@example.com" %>
 
               <% else %>

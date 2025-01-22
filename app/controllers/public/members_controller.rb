@@ -52,6 +52,13 @@ class Public::MembersController < ApplicationController
     redirect_to root_path
   end
 
+  def favorites
+    @member = Member.find(params[:id])
+    favorites = Favorite.where(member_id: @member.id).pluck(:free_post_id)
+    @favorite_free_posts = FreePost.find(favorites)
+    @free_post = FreePost.find(params[:id])
+  end
+
   private
 
   def member_params

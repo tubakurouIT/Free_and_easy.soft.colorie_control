@@ -13,6 +13,7 @@ class Member < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members
+  has_many :favorites, dependent: :destroy
   
   GUEST_MEMBER_EMAIL = "guest@example.com"
 
