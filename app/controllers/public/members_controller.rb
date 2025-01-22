@@ -56,7 +56,7 @@ class Public::MembersController < ApplicationController
     @member = Member.find(params[:id])
     favorites = Favorite.where(member_id: @member.id).pluck(:free_post_id)
     @favorite_free_posts = FreePost.find(favorites)
-    @free_post = FreePost.find(params[:id])
+    @free_post = FreePost.new
   end
 
   private
