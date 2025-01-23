@@ -1,50 +1,56 @@
+<div class="container my-5">
+  <!-- エラーメッセージがある場合に表示 -->
+  <% if @member.errors.any? %>
+    <div class="alert alert-danger">
+      <%= @member.errors.count %> 件のエラーが発生しました。
+      <ul>
+        <% @member.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<% if @member.errors.any? %>
-   <%= @member.errors.count %>件のエラーが発生しました
-   <ul>
-      <% @member.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-   </ul>
-<% end %>
+  <h4 class="my-5 text-center"><span class="bg-light p-2">会員情報編集</span></h4>
 
-
-
-<div class="container">
-   <h4 class="my-5"><span style="background-color:#eeeeee">会員情報編集</span></h4>
-</div>
-<div class="container">
- <div class="row">
-  <div class="col-8">
-
+  <!-- 会員情報編集フォーム -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
       <%= form_with model: @member, url: member_path, method: :patch do |f| %>
-      <table class="table table-borderless">
-        <tr>
-          <td>ニックネーム</td>
-          <td><%= f.text_field :name %></td>
-        </tr>
-       
-       <tr>
-         <td>image</td>
-         <td><%= f.file_field :profile_image, class: "form-control-file user_image", accept: 'image/*' %></td>
-       </tr>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td><label for="member_name">ニックネーム</label></td>
+                <td><%= f.text_field :name, class: 'form-control' %></td>
+              </tr>
 
-       <tr>
-         <td>introduction</td>
-         <td><%= f.text_area :introduction, class: "form-control introduction" %></td>
-       </tr>
+              <tr>
+                <td><label for="member_profile_image">プロフィール画像</label></td>
+                <td><%= f.file_field :profile_image, class: 'form-control-file', accept: 'image/*' %></td>
+              </tr>
 
-        <tr>
-          <td>メールアドレス</td>
-          <td><%= f.text_field :email %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><%= f.submit "編集内容を保存", class:"btn btn-success" %></td>
-          <td><%=link_to "退会する", member_path, method: :delete,"data-confirm" => "本当に削除しますか？",class:"btn btn-danger" %></td>
-        </tr>
-      </table>
+              <tr>
+                <td><label for="member_introduction">自己紹介</label></td>
+                <td><%= f.text_area :introduction, class: 'form-control' %></td>
+              </tr>
+
+              <tr>
+                <td><label for="member_email">メールアドレス</label></td>
+                <td><%= f.text_field :email, class: 'form-control' %></td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td>
+                  <%= f.submit "編集内容を保存", class: "btn btn-success" %>
+                  <%= link_to "退会する", member_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       <% end %>
-   </div>
+    </div>
   </div>
 </div>

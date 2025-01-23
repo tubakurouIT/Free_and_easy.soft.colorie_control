@@ -1,36 +1,58 @@
-
-
-<div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-3'>
-      <h2>Member info</h2>
-      <%= render 'public/members/info', member: @member %>
-      
-      <h2>FreePost</h2>
-      <%= render 'public/free_posts/form', free_post: @free_post %>
+<div class="container py-4">
+  <div class="row">
+    <!-- サイドバー -->
+    <div class="col-md-3 bg-light rounded shadow-sm p-4">
+      <h2 class="text-primary mb-4">Member Info</h2>
+      <div class="mb-4">
+        <%= render 'public/members/info', member: @member %>
+      </div>
+      <% unless current_member.email == "guest@example.com" %>
+      <h2 class="text-primary mb-4">Free Post</h2>
+      <% end %>
+      <div>
+        <%= render 'public/free_posts/form', free_post: @free_post %>
+      </div>
     </div>
-    <div class='col-md-8 offset-md-1'>
-      <h2>いいね記事一覧</h2>
-      
 
-      <table class="table">
-        <tbody>
-          <% @favorite_free_posts.each do |free_post| %>
-          <tr>
-          <td><%= image_tag free_post.get_image, size:'50x50' %></td>
-          <td><%= link_to free_post.body, free_post_path(free_post) %></td>
-          <td><%= link_to free_post.member.name, member_path(free_post.member_id) %></td>
-          <td><%= render "public/favorites/btn", free_post: free_post %></td>
-          <td><%= link_to "#{free_post.comments.count} コメント", free_post_path(free_post.id) %></p>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <!-- メインコンテンツ -->
+    <div class="col-md-8 offset-md-1">
+      <h2 class="text-primary mb-4">my favorites</h2>
 
+      <!-- テーブルのラップ -->
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead class="table-primary">
+            <tr>
+              <th>画像</th>
+              <th>記事</th>
+              <th>投稿者</th>
+              <th>いいね</th>
+              <th>コメント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @favorite_free_posts.each do |free_post| %>
+              <tr>
+                <td>
+                  <%= image_tag free_post.get_image, class: "rounded", size: "50x50" %>
+                </td>
+                <td>
+                  <%= link_to free_post.body, free_post_path(free_post), class: "text-decoration-none text-dark" %>
+                </td>
+                <td>
+                  <%= link_to free_post.member.name, member_path(free_post.member_id), class: "text-decoration-none text-dark fw-bold" %>
+                </td>
+                <td>
+                  <%= render "public/favorites/btn", free_post: free_post %>
+                </td>
+                <td>
+                  <%= link_to "#{free_post.comments.count} コメント", free_post_path(free_post.id), class: "text-decoration-none text-dark" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
-
-
-
-

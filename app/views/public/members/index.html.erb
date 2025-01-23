@@ -14,13 +14,13 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class='col-md-3'>
-      <h2>Member info</h2>
+    <h2 class="text-primary mb-4">Member info</h2>
       <%= render 'public/members/info', member: current_member %>
       
       <%= render 'public/free_posts/form', free_post: @free_post %>
     </div>
     <div class='col-md-8 offset-md-1'>
-      <h2>Members</h2>
+    <h2 class="text-primary mb-4">Members</h2>
       <%= render 'index', members: @members %>
     </div>
   </div>

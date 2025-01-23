@@ -11,6 +11,7 @@ class Admin::MembersController < ApplicationController
   def show
     @member = Member.find(params[:id])
     @free_posts = @member.free_posts.all
+    
   end
 
   def destroy

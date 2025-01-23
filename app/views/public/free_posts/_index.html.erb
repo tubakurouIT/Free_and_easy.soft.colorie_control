@@ -1,33 +1,75 @@
+<div class="container my-5">
+  <% unless current_member.email == "guest@example.com" %>
+    <!-- 検索フォーム -->
+    <div class="d-flex justify-content-center mb-4">
+      <div class="w-75">
+        <%= render "public/searches/form" %>
+      </div>
+    </div>
+  <% end %>
 
-<div class="d-flex justify-content-center mb-2">
-  <%= render "public/searches/form" %>
-</div>
+  <!-- Free Posts Table -->
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Free Posts</th>
+          <th scope="col">Name</th>
+          <th scope="col">Favorites</th>
+          <th scope="col">Comments</th>
+          <th scope="col" colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @free_posts.each do |free_post| %>
+          <tr>
+            <!-- Image -->
+            <td>
+              <%= image_tag free_post.get_image, size: '50x50', class: 'rounded' %>
+            </td>
 
-<table class='table table-hover table-inverse'>
-  <thead>
-    <tr>
-      <th>image</th>
-      <th>free_posts</th>
-      <th>name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% free_posts.each do |free_post| %>
-      <tr>
-        <td><%= image_tag free_post.get_image, size:'50x50' %></td>
-        <td><%= link_to free_post.body, free_post_path(free_post) %></td>
-        <td><%= link_to free_post.member.name, member_path(free_post.member_id) %></td>
-        <td><%= render "public/favorites/btn", free_post: free_post %></td>
-        <td><%= link_to "#{free_post.comments.count} コメント", free_post_path(free_post.id) %></p>
-        <% if current_member.id == free_post.member_id %>
-        <td><%= link_to "編集", edit_free_post_path(free_post),class:"btn btn-success" %></td>
-        <td><%= link_to "削除", free_post_path(free_post), method: :delete,class:"btn btn-danger" %></td>
+            <!-- Post Body -->
+            <td>
+              <%= link_to free_post.body, free_post_path(free_post), class: "text-decoration-none text-dark" %>
+            </td>
+
+            <!-- Member Name -->
+            <td>
+              <%= link_to free_post.member.name, member_path(free_post.member_id), class: "text-decoration-none text-dark fw-bold" %>
+            </td>
+            
+            <% unless current_member.email == "guest@example.com" %>
+              <!-- Favorites Button -->
+              <td>
+                <%= render "public/favorites/btn", free_post: free_post %>
+              </td>
+            <% end %>
+
+            <!-- Comments -->
+            <td>
+              <%= link_to "#{free_post.comments.count} コメント", free_post_path(free_post.id), class: "text-decoration-none text-dark" %>
+            </td>
+
+            <!-- Edit and Delete Actions (Visible only to the post owner) -->
+            <% if current_member.id == free_post.member_id %>
+              <td>
+                <%= link_to "編集", edit_free_post_path(free_post), class: "btn btn-success btn-sm" %>
+              </td>
+              <td>
+                <%= link_to "削除", free_post_path(free_post), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "本当に削除しても良いですか？" } %>
+              </td>
+            <% end %>
+          </tr>
         <% end %>
+      </tbody>
+    </table>
+  </div>
 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= paginate @free_posts %>
+  <!-- Pagination -->
+<div class="d-flex justify-content-center mt-4">
+  <% if @free_posts.respond_to?(:total_pages) && @free_posts.total_pages > 1 %>
+    <%= paginate @free_posts %>
+  <% end %>
+</div>
+</div>

@@ -1,19 +1,33 @@
+<div class="container my-5">
+  <!-- エラー表示 -->
+  <% if @free_post.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= @free_post.errors.count %>件のエラーが発生しました:</strong>
+      <ul class="mb-0">
+        <% @free_post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<% if @free_post.errors.any? %>
-   <%= @free_post.errors.count %>件のエラーが発生しました
-   <ul>
-      <% @free_post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-   </ul>
-<% end %>
+  <div class="row">
+    <!-- フォームコンテンツ -->
+    <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h1 class="text-primary mb-4">Edit</h1>
+          
+          <!-- 編集フォーム -->
+          <%= render 'form', free_post: @free_post %>
 
-<div class='container'>
-  <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-  		<h1>Editing free_post</h1>
-  		<%= render 'form', free_post: @free_post %>
-  		<%= link_to 'Show', @free_post %> |
-  		<%= link_to 'Back', free_posts_path, class: "back" %>  
+          <!-- ナビゲーションリンク -->
+          <div class="mt-4">
+            <%= link_to 'Show', @free_post, class: "btn btn-outline-primary me-2" %>
+            <%= link_to 'Back', free_posts_path, class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

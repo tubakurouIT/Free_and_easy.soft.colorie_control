@@ -1,19 +1,33 @@
+<div class="container my-5">
+  <!-- Error Messages -->
+  <% if @post.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= @post.errors.count %>件のエラーが発生しました:</strong>
+      <ul class="mb-0">
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<% if @post.errors.any? %>
-   <%= @post.errors.count %>件のエラーが発生しました
-   <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-   </ul>
-<% end %>
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 mx-auto">
+      <!-- Editing Post Heading -->
+      <h1 class="text-primary mb-4">Edit</h1>
 
-<div class='container'>
-  <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-  		<h1>Editing Post</h1>
-  		<%= render 'form', post: @post %>
-  		<%= link_to 'Show', @book %> |
-  		<%= link_to 'Back', posts_path, class: "back" %>
+      <!-- Post Form -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <%= render 'form', post: @post %>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="mt-4 d-flex justify-content-between">
+        <%= link_to 'Show', @post, class: "btn btn-outline-primary btn-sm" %>
+        <%= link_to 'Back', posts_path, class: "btn btn-outline-secondary btn-sm" %>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,24 +1,33 @@
 <div class="container my-5">
-  <div class="row">
-    <div class="col">
-      <div class="col-6 offset-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
 
-      <h4><span style="background-color:#eeeeee">管理者ログイン</span></h4>
-      <%= form_for(@admin, as: :admin, url: session_path(:admin)) do |f| %>
-        <div class="field my-2">
-          <%= f.label :"メールアドレス",class:"form-label mt-3"%><br />
-          <%= f.email_field :email, placeholder: "sample@example.com", autofocus: true, autocomplete: "email" ,class:"form-control" %>
-        <div class="field my-2">
-          <%= f.label :"パスワード",class:"form-label mt-3" %><br />
-          <%= f.password_field :password, autocomplete: "current_password",class:"form-control" %>
-        </div>
+      <!-- 管理者ログインフォーム -->
+      <div class="card shadow-sm p-4">
+        <h4 class="text-center mb-4"><span class="bg-light p-2">管理者ログイン</span></h4>
+        
+        <%= form_for(@admin, as: :admin, url: session_path(:admin)) do |f| %>
+          <%= render "public/shared/error_messages", resource: @admin %>
 
-        <div class="action">
-            <td><%= f.submit "ログイン", class: "btn btn-primary" %></td>
-        </div>
+          <!-- メールアドレス入力 -->
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, placeholder: "sample@example.com", autofocus: true, autocomplete: "email", class: "form-control" %>
+          </div>
 
-    <% end %>
+          <!-- パスワード入力 -->
+          <div class="mb-3">
+            <%= f.label :password, class: "form-label" %>
+            <%= f.password_field :password, autocomplete: "current_password", class: "form-control" %>
+          </div>
+
+          <!-- ログインボタン -->
+          <div class="d-grid">
+            <%= f.submit "ログイン", class: "btn btn-primary" %>
+          </div>
+        <% end %>
       </div>
+      
     </div>
   </div>
 </div>

@@ -1,84 +1,112 @@
-<div>
-  <%= flash[:notice] %>
-</div>
+<div class="container my-5">
+  <!-- Flash Message -->
+  <% if flash[:notice].present? %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
 
-
-<div class="container">
   <div class="row">
+    <!-- Sidebar Section -->
     <div class="col-md-3">
-      <h2>Member info</h2>
-      <%= render 'public/members/info', member: @member %>
-      <%= render 'public/free_posts/form', free_post: @free_post_new %>
+      <!-- Member Info -->
+      <h2 class="text-primary mb-4">Member Info</h2>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <%= render 'public/members/info', member: @member %>
+        </div>
+      </div>
+
+      <!-- New Free Post Form -->
+      <h2 class="text-primary mb-4">New Free Post</h2>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <%= render 'public/free_posts/form', free_post: @free_post_new %>
+        </div>
+      </div>
     </div>
 
+    <!-- Main Content Section -->
     <div class="col-md-8 offset-md-1">
-      <div class="row">
-        <h2>free_post detail</h2>
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>
-                <%= link_to(@free_post.member) do %>
-                  <%= image_tag @free_post.member.get_profile_image, size: "100x100" %><br>
-                  <%= @free_post.member.name %>
-                <% end %>
-              </td>
-              <td><%= @free_post.body %></td>
-              <td><%= render "public/favorites/btn", free_post: @free_post %></td>
-              <% if @free_post.member == current_member %>
-                <td><%= link_to 'Edit', edit_free_post_path(@free_post), class: "btn btn-sm btn-success" %></td>
-                <td>
-                  <%= link_to 'Destroy', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
-                </td>
-              <% end %>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- コメントセクション -->
-      <div class="mt-4">
-        <h3>コメント一覧</h3>
-        <p>コメント件数：<%= @free_post.comments.count %></p>
-
-        <table class="table table-bordered">
-          <tbody>
-            <% @free_post.comments.each do |comment| %>
+      <!-- Free Post Details -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="text-primary mb-4">Free Post Detail</h2>
+          <table class="table table-bordered">
+            <tbody>
               <tr>
-                <td class="align-middle" style="width: 10%;">
-                  <%= link_to member_path(comment.member) do %>
-                    <%= image_tag comment.member.get_profile_image, size: "50x50", class: "rounded-circle" %>
+                <!-- Post Member Info -->
+                <td class="text-center align-middle" style="width: 15%;">
+                  <%= link_to(@free_post.member) do %>
+                    <%= image_tag @free_post.member.get_profile_image, class: "img-thumbnail mb-2", size: "100x100" %><br>
+                    <strong><%= @free_post.member.name %></strong>
                   <% end %>
                 </td>
-                <td class="align-middle" style="width: 70%;">
-                  <strong><%= comment.member.name %></strong><br>
-                  <small class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d') %></small><br>
-                  <%= comment.comment %>
-                </td>
-                <td class="align-middle" style="width: 20%;">
-                  <% if comment.member == current_member %>
-                    <%= link_to "削除", free_post_comment_path(comment.free_post, comment), method: :delete, class: "btn btn-sm btn-danger" %>
-                  <% end %>
-                </td>
+                <!-- Post Body -->
+                <td class="align-middle"><%= simple_format(@free_post.body) %></td>
+                <!-- Favorite Button -->
+                <td class="align-middle"><%= render "public/favorites/btn", free_post: @free_post %></td>
+                <!-- Edit/Delete Buttons -->
+                <% if @free_post.member == current_member %>
+                  <td class="align-middle text-end">
+                    <%= link_to 'Edit', edit_free_post_path(@free_post), class: "btn btn-sm btn-outline-success me-2" %>
+                    <%= link_to 'Destroy', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %>
+                  </td>
+                <% end %>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <!-- コメント投稿フォーム -->
-      <div class="mt-5">
-        <h3>コメントを投稿する</h3>
-        <%= form_with model: [@free_post, @comment], local: true do |f| %>
-          <div class="form-group">
-            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
-          </div>
-          <div class="form-group mt-3">
-            <%= f.submit "送信する", class: "btn btn-primary" %>
-          </div>
-        <% end %>
+      <!-- Comments Section -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h3 class="text-primary mb-4">コメント一覧</h3>
+          <p>コメント件数：<%= @free_post.comments.count %></p>
+          <table class="table table-bordered">
+            <tbody>
+              <% @free_post.comments.each do |comment| %>
+                <tr>
+                  <!-- Comment Member Info -->
+                  <td class="text-center align-middle" style="width: 10%;">
+                    <%= link_to member_path(comment.member) do %>
+                      <%= image_tag comment.member.get_profile_image, class: "rounded-circle", size: "50x50" %>
+                    <% end %>
+                  </td>
+                  <!-- Comment Content -->
+                  <td class="align-middle" style="width: 70%;">
+                    <strong><%= comment.member.name %></strong><br>
+                    <small class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d') %></small><br>
+                    <%= simple_format(comment.comment) %>
+                  </td>
+                  <!-- Delete Button -->
+                  <% if comment.member == current_member %>
+                    <td class="text-end align-middle" style="width: 20%;">
+                      <%= link_to "削除", free_post_comment_path(comment.free_post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
 
+      <!-- New Comment Form -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="text-primary mb-4">コメントを投稿する</h3>
+          <%= form_with model: [@free_post, @comment], local: true do |f| %>
+            <div class="mb-3">
+              <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
+            </div>
+            <div class="text-end">
+              <%= f.submit "送信する", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

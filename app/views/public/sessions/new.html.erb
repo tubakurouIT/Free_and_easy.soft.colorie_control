@@ -1,36 +1,40 @@
-
-
-
 <div class="container my-5">
-  <div class="row">
-    <div class="col">
-      <div class="col-6 offset-3">
-      
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <!-- エラーメッセージ -->
       <div><%= flash[:error] %></div>
-    
-  <h4 class="my-3"><span style="background-color:#eeeeee">ログイン</span></h4>
-  
-  <p>会員の方はこちらからログイン</p>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <%= render "public/shared/error_messages", resource: resource %>
-        <div class="field my-2">
-          <%= f.label :"メールアドレス" %><br />
-          <%= f.email_field :email, placeholder: "sample@example.com", autofocus: true, autocomplete: "email",class:"form-control" %>
-        </div>
-          <div class="field my-2">
-          <%= f.label :"パスワード" %><br />
-          <%= f.password_field :password, autocomplete: "current_password",class:"form-control" %>
-          
-          <div class="actions my-3">
-            <%= f.submit "ログイン",class: "btn btn-primary"%>
-          </div>
-    <% end %>
+      
+      <!-- ログインフォーム -->
+      <div class="card shadow-sm p-4">
+        <h4 class="text-center mb-4"><span class="bg-light p-2">ログイン</span></h4>
+        <p class="text-center">会員の方はこちらからログイン</p>
+        
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "public/shared/error_messages", resource: resource %>
 
-   <div>
-   <h4 class="text-left"><span style="background-color:#eeeeee">会員登録がお済みでない⽅</span></h4><br />
-   <p class="text-left"><%= link_to "こちら", new_member_registration_path %> から新規登録を行ってください。</p>
-   </div>
-   
+          <!-- メールアドレス入力フィールド -->
+          <div class="mb-3">
+            <%= f.label :"メールアドレス", class: "form-label" %>
+            <%= f.email_field :email, placeholder: "sample@example.com", autofocus: true, autocomplete: "email", class: "form-control" %>
+          </div>
+          
+          <!-- パスワード入力フィールド -->
+          <div class="mb-3">
+            <%= f.label :"パスワード", class: "form-label" %>
+            <%= f.password_field :password, autocomplete: "current_password", class: "form-control" %>
+          </div>
+
+          <!-- ログインボタン -->
+          <div class="d-grid">
+            <%= f.submit "ログイン", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- 会員登録リンク -->
+      <div class="text-center mt-4">
+        <h5><span class="bg-light p-2">会員登録がお済みでない⽅</span></h5>
+        <p><%= link_to "こちら", new_member_registration_path %> から新規登録を行ってください。</p>
       </div>
     </div>
   </div>

@@ -1,29 +1,54 @@
-<table class='table table-hover table-inverse'>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Opinion</th>
-      <th>name</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% posts.each do |post| %>
-      <tr>
-       
-        <td><%= image_tag post.get_image, size:'50x50' %></td>
-        <td><%= link_to post.title,post %></td>
-        <td><%= post.body %></td>
-        <td><%= post.member.name %></td>
-        <% if current_member.id == post.member_id %>
-        <td><%= link_to "編集", edit_post_path(post),class:"btn btn-success" %></td>
-        <td><%= link_to "削除", post_path(post), method: :delete,class:"btn btn-danger" %></td>
-        <% end %>
-        
+<div class="container my-5">
+  <!-- Posts Table Heading -->
+  <h2 class="text-primary mb-4">Posts</h2>
 
-       
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <!-- Posts Table -->
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col" class="text-center">Image</th>
+          <th scope="col">Title</th>
+          <th scope="col">Opinion</th>
+          <th scope="col">Name</th>
+          <th scope="col" colspan="2" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% posts.each do |post| %>
+          <tr>
+            <!-- Image Column -->
+            <td class="text-center align-middle">
+              <%= image_tag post.get_image, size: '50x50', class: 'rounded' %>
+            </td>
+            
+            <!-- Title Column -->
+            <td class="align-middle">
+              <%= link_to post.title, post, class: "text-decoration-none text-primary" %>
+            </td>
+
+            <!-- Opinion Column -->
+            <td class="align-middle">
+              <%= truncate(post.body, length: 50) %>
+            </td>
+
+            <!-- Name Column -->
+            <td class="align-middle">
+              <%= post.member.name %>
+            </td>
+
+            <!-- Actions Columns -->
+            <% if current_member.id == post.member_id %>
+              <td class="text-center align-middle">
+                <%= link_to "編集", edit_post_path(post), class: "btn btn-success btn-sm" %>
+              </td>
+              <td class="text-center align-middle">
+                <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "本当に削除しても良いですか？" } %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

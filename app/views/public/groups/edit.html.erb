@@ -1,8 +1,15 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>Editing Group</h2>
-      <%= render 'layouts/errors', obj: @group %>
+<div class="container my-5">
+  <!-- Group Editing Section -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="text-primary mb-4">Editing Group</h2>
+      
+      <!-- Error Messages -->
+      <div class="mb-3">
+        <%= render 'layouts/errors', obj: @group %>
+      </div>
+
+      <!-- Group Editing Form -->
       <%= render 'form', group: @group %>
     </div>
   </div>

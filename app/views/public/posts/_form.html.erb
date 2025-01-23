@@ -1,27 +1,39 @@
 <% unless current_member.email == "guest@example.com" %>
-  <h2 class="mt-3">New Post</h2>
-  <%= form_with model:post,local:true do |f| %>
-    <div class="form-group">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control post_title' %>
-    </div>
+  <div class="container my-5">
+    <!-- New Post Heading -->
+    <h2 class="text-primary mb-4">Post</h2>
 
-    <div class="form-group">
-      <%= f.label :image %>
-      <%= f.file_field :image, class: "form-control-file post_image", accept: 'image/*' %></td>
-    </div>
+    <!-- New Post Form -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <%= form_with model: post, local: true do |f| %>
+          <!-- Title Input -->
+          <div class="mb-3">
+            <%= f.label :title, "Title", class: "form-label text-primary" %>
+            <%= f.text_field :title, class: "form-control post_title", placeholder: "Enter the title" %>
+          </div>
 
-    <div class="form-group">
-      <%= f.label :body %>
-      <%= f.text_area :body, class: 'form-control post_body' %>
+          <!-- Image Input -->
+          <div class="mb-3">
+            <%= f.label :image, "Image", class: "form-label text-primary" %>
+            <%= f.file_field :image, class: "form-control post_image", accept: "image/*" %>
+          </div>
+
+          <!-- Body Input -->
+          <div class="mb-3">
+            <%= f.label :body, "Body", class: "form-label text-primary" %>
+            <%= f.text_area :body, class: "form-control post_body", rows: 5, placeholder: "Write your post content here..." %>
+          </div>
+
+          <!-- Submit and Delete Buttons -->
+          <div class="d-flex gap-2">
+            <%= f.submit "Submit", class: "btn btn-success btn-sm" %>
+            <% if post.present? && post.id %>
+              <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "本当に削除しても良いですか？" } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    
-    <div class="form-group">
-      <%= f.submit class: 'btn btn-success' %>
-      <% if post.present? && post.id %>
-      <%= link_to "削除", post_path(post), method: :delete,class:"btn btn-danger" %>
-      <% end %>
-    </div>
-    
-  <% end %>
+  </div>
 <% end %>
