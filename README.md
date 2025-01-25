@@ -21,7 +21,10 @@
 - 他の人がどんな食材をお勧めしているのか知りたい時
 
 ## 設計書
-- 「後ほど作成予定」
+- UI Flows :https://app.diagrams.net/#G1t98l2x0BVXkR3GoGYOecTwEZgMW2X7Sg#%7B%22pageId%22%3A%22b520641d-4fe3-3701-9064-5fc419738815%22%7D
+- ER図 :https://app.diagrams.net/#G1_gIFJUN1XLunaC89bhyVCjYORJGr9MhP#%7B%22pageId%22%3A%22WBzPutvMc2oJIYSJlkVW%22%7D
+- テーブル定義書 :https://docs.google.com/spreadsheets/d/1P7oiVBjVrCa2FXXYvuxSJqUK95qCkCLHucaLMMSV0C0/edit?gid=0#gid=0
+- アプリケーション詳細設計 :https://docs.google.com/spreadsheets/d/1abOTGWJuLt9E4OSjgTwqf8k_fMADv8hpDcr2D2ujh5E/edit?gid=549108681#gid=549108681
 ​
 ## 開発環境
 - OS：Linux(CentOS)
@@ -32,5 +35,4 @@
 ​
 ## 使用素材
 pexel(https://www.pexels.com/ja-jp/)
-pakutaso(https://www.pakutaso.com/)
-irasutoya(https://www.irasutoya.com/)
+
