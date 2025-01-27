@@ -4,4 +4,7 @@
 <% elsif @model == 'free_post' %>
     <h3>FreePosts search for "<%= @content %>"</h3>
   <%= render 'public/free_posts/index', free_posts: @records %>
+<% else %>
+    <h3>groups search for "<%= @content %>"</h3>
+  <%= render 'public/groups/index', groups: @records %>
 <% end %>
