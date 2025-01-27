@@ -14,6 +14,7 @@ class Member < ApplicationRecord
   has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members
   has_many :favorites, dependent: :destroy
+  has_many :favorite_free_posts, through: :favorites, source: :free_post 
   
   GUEST_MEMBER_EMAIL = "guest@example.com"
 
@@ -50,4 +51,27 @@ class Member < ApplicationRecord
     end
   end
 
+  def join_group(group)
+    self.group_members.find_or_create_by(group: group)
+  end
+
+  def reject_group(group)
+    self.group_members.find_by(group: group)&.destroy
+  end
+
+  def join_group?(group)
+    self.groups.include?(group)
+  end
+
+  def favorite(free_post)
+    self.favorites.find_or_create_by(free_post: free_post)
+  end
+
+  def unfavorite(free_post)
+    self.favorites.find_by(free_post: free_post)&.destroy
+  end
+
+  def favorite?(free_post)
+    self.favorite_free_posts.include?(free_post)
+  end
 end

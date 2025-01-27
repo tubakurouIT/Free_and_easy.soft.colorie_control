@@ -1,6 +1,6 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_member!
-  before_action :ensure_correct_member, only: [:edit, :update]
+  before_action :ensure_correct_member, only: [:edit, :update, :destroy, :permits]
   before_action :ensure_guest_member, only: [:new, :edit, :create, :update, :destroy]
 
   def new
@@ -11,16 +11,20 @@ class Public::GroupsController < ApplicationController
     @free_post = FreePost.new
     @groups = Group.all
     @member = Member.find(current_member.id)
+
+    
   end
 
   def show
     @free_post =FreePost.new
     @group = Group.find(params[:id])
     @member = Member.find(current_member.id)
+    @free_posts =FreePost.all
+    @group_free_posts = FreePost.where(group_id: @group.id).page(params[:group_page]).per(10)
   end
 
   def edit
-    @group = Group.find(params[:id])
+    @group = Group.find(params[:id]) 
   end
 
   def create
@@ -52,6 +56,14 @@ class Public::GroupsController < ApplicationController
     end
   end
 
+
+  def permits
+    @group = Group.find(params[:id])
+    @application_group_members = @group.group_members.where(status: 'application').page(params[:page])
+    @permit_group_members = @group.group_members.where(status: 'permit').page(params[:page])
+    @rejection_group_members = @group.group_members.where(status: 'rejection').page(params[:page])
+  end
+
   private
 
   def group_params
@@ -61,7 +73,7 @@ class Public::GroupsController < ApplicationController
   def ensure_correct_member
     @group = Group.find(params[:id])
     unless @group.owner_id == current_member.id
-      redirect_to groups_path
+      redirect_to groups_path, alert: "グループオーナーのみ編集が可能です"
     end
   end
 

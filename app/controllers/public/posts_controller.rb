@@ -29,8 +29,13 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: "You have created book successfully."
     else
-      @posts = Post.all
-      render 'index'
+      
+      @members = Member.all
+      @posts = current_member.posts.limit(3)
+      @free_post = FreePost.new
+      @free_posts = current_member.free_posts.limit(3)
+      @groups = current_member.groups.limit(3)
+      render 'public/members/mypage'
     end
   end
 

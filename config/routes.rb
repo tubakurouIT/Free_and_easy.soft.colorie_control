@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "/search", to: "searches#search"
     get 'members/mypage', to: 'members#mypage'
+    get "groups/:id/permits" => "groups#permits", as: :permits
     resources :members, only: [:index, :show, :edit, :update, :destroy] do
       member do
         get :favorites
@@ -42,7 +43,7 @@ Rails.application.routes.draw do
       resource:favorites, only: [:create, :destroy]
     end
     resources :groups, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
-      resource :group_members, only: [:create, :destroy]
+      resource :group_members, only: [:create, :destroy, :update]
     end
   end
 

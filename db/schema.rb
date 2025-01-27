@@ -66,10 +66,13 @@ ActiveRecord::Schema.define(version: 2025_01_22_081447) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "member_id"
-    t.integer "free_post_id"
+    t.integer "member_id", null: false
+    t.integer "free_post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["free_post_id"], name: "index_favorites_on_free_post_id"
+    t.index ["member_id", "free_post_id"], name: "index_favorites_on_member_id_and_free_post_id", unique: true
+    t.index ["member_id"], name: "index_favorites_on_member_id"
   end
 
   create_table "free_posts", force: :cascade do |t|
@@ -83,9 +86,11 @@ ActiveRecord::Schema.define(version: 2025_01_22_081447) do
   create_table "group_members", force: :cascade do |t|
     t.integer "member_id", null: false
     t.integer "group_id", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_members_on_group_id"
+    t.index ["member_id", "group_id"], name: "index_group_members_on_member_id_and_group_id", unique: true
     t.index ["member_id"], name: "index_group_members_on_member_id"
   end
 
@@ -122,6 +127,8 @@ ActiveRecord::Schema.define(version: 2025_01_22_081447) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "free_posts"
+  add_foreign_key "favorites", "members"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "members"
 end

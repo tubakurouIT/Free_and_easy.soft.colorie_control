@@ -58,7 +58,10 @@
                 <td>
                   <ul class="list-unstyled">
                     <% @group.members.each do |member| %>
-                      <li><%= member.name %></li>
+                      <% group_member = member.group_members.find_by(group_id: @group.id) %>
+                      <% if group_member&.status == 'permit' %>
+                        <li><%= member.name %></li>
+                      <% end %>
                     <% end %>
                   </ul>
                 </td>
@@ -67,17 +70,23 @@
                 <td>
                   <% if @group.owner_id == current_member.id %>
                     <div class="d-flex gap-2">
+                      <%= link_to "承認待ち一覧", permits_path(@group),  class: "dropdown-item text-secondary bg-transparent" %>
                       <%= link_to "Edit", edit_group_path(@group), class: "btn btn-sm btn-success" %>
                       <%= link_to "グループを削除", group_path(@group), method: :delete, data: { confirm: "本当に削除しても良いですか？" }, class: "btn btn-sm btn-danger" %>
                     </div>
                   <% elsif current_member.email != "guest@example.com" %>
-                    <% if @group.include_member?(current_member) %>
-                      <%= link_to "Leave this group", group_group_members_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
+                    <% current_group = current_member.group_members.find_by(group_id: @group.id) %>
+                    <% if current_group and current_group.status == 'permit' %>
+                      <%= link_to 'グループ退出', group_group_members_path(@group), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "本当にグループを退出しますか？" } %>
+                    <% elsif current_member.join_group?(@group) %>
+                      <%= link_to '申請取消', group_group_members_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
                     <% else %>
-                      <%= link_to "Join this group", group_group_members_path(@group), method: :post, class: "btn btn-sm btn-success" %>
-                    <% end %>
+                      <%= link_to '加入申請', group_group_members_path(@group), method: :post, class: "btn btn-sm btn-success" %>
                   <% end %>
+                <% end %>
                 </td>
+
+                <%= render 'public/groups/show', free_posts: @group_free_posts %>
               </tr>
             </tbody>
           </table>
@@ -86,3 +95,4 @@
     </div>
   </div>
 </div>
+

@@ -1,0 +1,37 @@
+<div class="container">
+  <h2 class="text-center"><%= @group.name %></h2>
+  <h4 class="text-center">承認待ち一覧</h4>
+
+  <div class="row mt-5">
+    <div class="col-11 col-md-12 mx-auto">
+      <%= render 'public/groups/members', group: @group, group_members: @application_group_members %>
+    </div>
+    <div class="mx-auto mt-5"><%= paginate @application_group_members %></div>
+  </div>
+
+  <h4 class="text-center">許可一覧</h4>
+
+  <div class="row mt-5">
+    <div class="col-11 col-md-12 mx-auto">
+      <%= render 'public/groups/members', group: @group, group_members: @permit_group_members %>
+    </div>
+    <div class="mx-auto mt-5"><%= paginate @permit_group_members %></div>
+  </div>
+
+  <h4 class="text-center">拒否一覧</h4>
+
+  <div class="row mt-5">
+    <div class="col-11 col-md-12 mx-auto">
+      <%= render 'public/groups/members', group: @group, group_members: @rejection_group_members %>
+    </div>
+    <div class="mx-auto mt-5"><%= paginate @rejection_group_members %></div>
+  </div>
+
+
+  <div class="row mt-5">
+    <div class="col-md-9 mx-auto">
+    <p class="text-center"><%= link_to "戻る", group_path(@group), class: 'text-dark font-weight-bold' %></p>
+    </div>
+  </div>
+
+</div>

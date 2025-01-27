@@ -8,19 +8,23 @@
       </div>
       
       <table class="table table-borderless">
-        <tbody>
-          <!-- Name -->
-          <tr>
-            <th scope="row" class="text-primary">Name</th>
-            <td class="fw-bold"><%= member.name %></td>
-          </tr>
-          <!-- Introduction -->
-          <tr>
-            <th scope="row" class="text-primary">Introduction</th>
-            <td><%= member.introduction %></td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <!-- Name -->
+            <tr>
+              <th scope="row" class="text-primary">Name</th>
+            </tr>
+            <tr>
+              <td class="fw-bold"><%= member.name %></td>
+            </tr>
+            <!-- Introduction -->
+            <tr>
+              <th scope="row" class="text-primary">Introduction</th>
+            </tr>
+            <tr>
+              <td><%= member.introduction %></td>
+            </tr>
+          </tbody>
+        </table>
 
       <!-- Edit Button (Visible only if not a guest account) -->
       <% if member.email != "guest@example.com" %>
