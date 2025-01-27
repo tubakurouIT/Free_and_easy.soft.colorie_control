@@ -27,7 +27,9 @@
             
             <!-- Member Count -->
             <td>
-              <%= group.group_members.where(status: :permit).count %>
+              <% #TODO 練習 %>
+              <%#= group.group_members.permit.count %>
+              <%= GroupMember.permit.where(group_id: group.id).count %>
               
             </td>
            

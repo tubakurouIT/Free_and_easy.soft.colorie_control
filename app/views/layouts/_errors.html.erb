@@ -1,8 +1,7 @@
-
 <% if obj.errors.any? %>
-  <div id="error_explanation">
-    <h3><%= pluralize(obj.errors.count, "error") %> prohibited this obj from being saved:</h3>
-    <ul>
+  <div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading"><%= pluralize(obj.errors.count, "error") %> 保存できませんでした。</h4>
+    <ul class="mb-0">
       <% obj.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>

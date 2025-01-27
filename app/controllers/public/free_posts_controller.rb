@@ -28,7 +28,9 @@ class Public::FreePostsController < ApplicationController
       redirect_to free_posts_path, notice: "successfully"
     else
       @free_posts =FreePost.all
-      render 'index'
+      current_member_group_ids = current_member.groups.ids
+      @group_free_posts = FreePost.where(group_id: current_member_group_ids).page(params[:group_page]).per(3)
+      render 'public/free_posts/index'
     end
   end
 
