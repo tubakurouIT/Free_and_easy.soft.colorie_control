@@ -80,19 +80,23 @@
         </tr>
       </thead>
       <tbody>
+      
         <% groups.each do |group| %>
-          <tr>
-            <td>
-              <%= image_tag group.get_group_image, size: '50x50', class: 'rounded' %>
-            </td>
-            <td>
-              <%= link_to group.name, group_path(group), class: "text-decoration-none text-dark fw-bold" %>
-            </td>
-            <td><%= group.members.count %></td>
-            <td>
-              <%= link_to 'Show', group, class: 'btn btn-primary btn-sm' %>
-            </td>
-          </tr>
+          <% group_member = group.group_members.find_by(member_id: current_member.id) %>
+          <% if group_member&.status == 'permit' %>
+            <tr>
+              <td>
+                <%= image_tag group.get_group_image, size: '50x50', class: 'rounded' %>
+              </td>
+              <td>
+                <%= link_to group.name, group_path(group), class: "text-decoration-none text-dark fw-bold" %>
+              </td>
+              <td><%= group.members.count %></td>
+              <td>
+                <%= link_to 'Show', group, class: 'btn btn-primary btn-sm' %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
         <tr>
           <td colspan="4" class="text-center">

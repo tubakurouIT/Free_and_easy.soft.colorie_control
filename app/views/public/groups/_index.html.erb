@@ -12,6 +12,7 @@
       </thead>
       <tbody>
         <% groups.each do |group| %>
+       
           <tr>
             <!-- Group Image -->
             <td>
@@ -22,11 +23,14 @@
             <td>
               <%= link_to group.name, group_path(group), class: "text-decoration-none text-dark fw-bold" %>
             </td>
-
+            
+            
             <!-- Member Count -->
             <td>
-              <%= group.members.count %>
+              <%= group.group_members.where(status: :permit).count %>
+              
             </td>
+           
 
             <!-- Actions -->
             <td>

@@ -2,12 +2,12 @@
   <div class='row'>
     <div class='col-md-3'>
       <h2>member info</h2>   
-      <%= render 'info', member: current_member %>
+      <%= render 'public/members/info', member: current_member %>
       <%= render 'public/posts/form', post: @post %> 
    </div>
 
    <div class='col-md-8 offset-md-1'>
-    <%= render 'mypage',free_posts: @free_posts, posts: @posts, groups: @groups %>
+    <%= render 'public/members/mypage',free_posts: @free_posts, posts: @posts, groups: @groups %>
    </div>
   </div>
 </div>

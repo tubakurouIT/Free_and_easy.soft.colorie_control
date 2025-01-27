@@ -1,0 +1,7 @@
+ja:
+  enums:
+    group_member:
+      status:
+        application: 申請中
+        permit: 許可済
+        rejection: 拒否
