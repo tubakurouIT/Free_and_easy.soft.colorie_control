@@ -23,7 +23,7 @@
                       <%= image_tag group.get_group_image, size: "50x50", class: 'rounded' %>
                     </td>
                     <td>
-                      <%= link_to group.name, admin_group_path(group), class: "text-decoration-none fw-bold text-dark" %>
+                      <%= group.name %>
                     </td>
                     <td><%= group.members.count %></td>
                     <td>
