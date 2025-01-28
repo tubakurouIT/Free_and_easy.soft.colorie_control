@@ -30,4 +30,5 @@ class Public::GroupMembersController < ApplicationController
   def group_member_params
     params.require(:group_member).permit(:status)
   end
+  
 end

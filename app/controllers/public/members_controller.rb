@@ -6,9 +6,7 @@ class Public::MembersController < ApplicationController
   def index
     @members = Member.all
     @member = Member.new
-  
   end
-
 
   def mypage
     @members = Member.all
@@ -21,21 +19,17 @@ class Public::MembersController < ApplicationController
 
 
   def show
-    #@member = current_member
     @member = Member.find(params[:id])
-    
     @free_post = FreePost.new
     @free_posts = @member.free_posts.all
   end
 
   def edit
     @member = Member.find(params[:id])
-    #@member = current_member
   end
 
   def update
     @member = Member.find(params[:id])
-    #@member = current_member
     if @member.update(member_params)
       flash[:notice] = "会員情報を編集しました。"
     redirect_to members_mypage_path, notice: "You have updated user successfully."

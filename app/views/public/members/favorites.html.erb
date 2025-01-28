@@ -7,7 +7,7 @@
         <%= render 'public/members/info', member: @member %>
       </div>
       <% unless current_member.email == "guest@example.com" %>
-      <h2 class="text-primary mb-4">Free Post</h2>
+        <h2 class="text-primary mb-4">Free Post</h2>
       <% end %>
       <div>
         <%= render 'public/free_posts/form', free_post: @free_post %>

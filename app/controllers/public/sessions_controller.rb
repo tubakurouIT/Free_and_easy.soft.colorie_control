@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Public::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
@@ -10,7 +8,6 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
-  
   def reject_member
     @member = Member.find_by(email: params[:member][:email])
      if @member
@@ -22,7 +19,7 @@ class Public::SessionsController < Devise::SessionsController
      else
        flash[:error] = "該当するユーザーが見つかりません。"
      end
-end
+  end
 
 
 
@@ -47,7 +44,6 @@ end
      else
       flash[:error] = "該当するユーザーが見つかりません。"
      end
-     
     super
    end
 

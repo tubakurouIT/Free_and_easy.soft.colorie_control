@@ -74,4 +74,5 @@ class Member < ApplicationRecord
   def favorite?(free_post)
     self.favorite_free_posts.include?(free_post)
   end
+  
 end

@@ -1,6 +1,4 @@
 <div class="container my-5">
-    
-
   <div class="row">
     <!-- Sidebar Section -->
     <div class="col-md-3">
@@ -14,7 +12,7 @@
 
       <!-- New Free Post Form -->
       <% unless current_member.email == "guest@example.com" %>
-      <h2 class="text-primary mb-4">New Free Post</h2>
+        <h2 class="text-primary mb-4">New Free Post</h2>
       <% end %>
       <div class="card shadow-sm">
         <div class="card-body">
@@ -41,17 +39,17 @@
                 
                 </td>
                 <% unless current_member.email == "guest@example.com" %>
-                <!-- Post Body -->
-                <td class="align-middle"><%= simple_format(@free_post.body) %></td>
-                <!-- Favorite Button -->
-                <td class="align-middle"><%= render "public/favorites/btn", free_post: @free_post %></td>
-                <!-- Edit/Delete Buttons -->
-                <% if @free_post.member == current_member %>
-                  <td class="align-middle text-end">
-                    <%= link_to 'Edit', edit_free_post_path(@free_post), class: "btn btn-sm btn-outline-success me-2" %>
-                    <%= link_to 'Destroy', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %>
-                  </td>
-                <% end %>
+                  <!-- Post Body -->
+                  <td class="align-middle"><%= simple_format(@free_post.body) %></td>
+                  <!-- Favorite Button -->
+                  <td class="align-middle"><%= render "public/favorites/btn", free_post: @free_post %></td>
+                  <!-- Edit/Delete Buttons -->
+                  <% if @free_post.member == current_member %>
+                    <td class="align-middle text-end">
+                      <%= link_to 'Edit', edit_free_post_path(@free_post), class: "btn btn-sm btn-outline-success me-2" %>
+                      <%= link_to 'Destroy', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %>
+                    </td>
+                  <% end %>
                 <% end %>
               </tr>
             </tbody>

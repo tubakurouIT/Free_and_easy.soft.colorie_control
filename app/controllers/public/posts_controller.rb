@@ -2,7 +2,6 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_member!
   before_action :is_matching_login_member, except: [:index, :create]
  
-
   def index
     @post = Post.new
     @posts = current_member.posts.all
@@ -12,15 +11,11 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id]) 
     @member = @post.member
     @post_new = Post.new
-    
-
   end
 
   def edit
-   
     @post = Post.find(params[:id])
   end
-
 
   def create
     @post = Post.new(posts_params)
@@ -29,7 +24,6 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: "You have created book successfully."
     else
-      
       @members = Member.all
       @posts = current_member.posts.limit(3)
       @free_post = FreePost.new
@@ -40,7 +34,6 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    
     @post = Post.find(params[:id])
     if @post.update(posts_params)
       redirect_to posts_path, notice: "You have updated book successfully."
@@ -55,8 +48,8 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
 
-
   private
+  
   def posts_params
     params.require(:post).permit(:title, :body, :image)
   end

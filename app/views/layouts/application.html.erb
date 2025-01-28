@@ -2,37 +2,41 @@
 <html>
   <head>
     <title>Free_and_easy.soft.calorie_control</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <script src="https://kit.fontawesome.com/38ce7d68a2.js" crossorigin="anonymous"></script>
-    
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= render 'layouts/header' %>
+    
     <main>
-    <!-- Flash Message -->
+      <!-- Flash Message -->
       <% if flash.now[:notice].present? %>
-      <div class="container my-5">
-        <div class="alert alert-success" >
-          <%= flash.now[:notice] %>
+        <div class="container my-5">
+          <div class="alert alert-success">
+            <%= flash.now[:notice] %>
+          </div>
         </div>
-      </div>
       <% end %>
+
       <% if flash.now[:error].present? %>
-      <div class="container my-5">
-        <div class="alert alert-danger" >
-          <%= flash.now[:error] %>
+        <div class="container my-5">
+          <div class="alert alert-danger">
+            <%= flash.now[:error] %>
+          </div>
         </div>
-      </div>
       <% end %>
-    <%= yield %>
+
+      <%= yield %>
     </main>
+
     <%= render 'layouts/footer' %>
   </body>
 </html>

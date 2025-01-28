@@ -1,31 +1,29 @@
- <% if group_members.present? %>
-      <div class="table-responsive">
-        <table class="table table-hover text-nowrap bg-light">
-          <thead class="thead-dark">
+<% if group_members.present? %>
+    <div class="table-responsive">
+      <table class="table table-hover text-nowrap bg-light">
+        <thead class="thead-dark">
+          <tr>
+            <th>名前</th>
+            
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% group_members.each do |group_member| %>
             <tr>
-              <th>名前</th>
-             
-              <th></th>
+              <td><%= link_to group_member.member.name, member_path(group_member.member.id), class: "text-dark" %></td>
+              <td class="text-right">
+                <%= form_with model: group_member, url: group_group_members_path(group) do |f| %>
+                  <%= f.select :status, GroupMember.statuses_i18n.keys.map { |k| [I18n.t("enums.group_member.status.#{k}"), k] }%>
+                  <%= hidden_field_tag :group_member_id, group_member.id %>
+                  <%= f.submit "変更する" %>
+                <% end %>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            <% group_members.each do |group_member| %>
-              <tr>
-                <td><%= link_to group_member.member.name, member_path(group_member.member.id), class: "text-dark" %></td>
-                
-               
-                <td class="text-right">
-                  <%= form_with model: group_member, url: group_group_members_path(group) do |f| %>
-                    <%= f.select :status, GroupMember.statuses_i18n.keys.map { |k| [I18n.t("enums.group_member.status.#{k}"), k] }%>
-                    <%= hidden_field_tag :group_member_id, group_member.id %>
-                    <%= f.submit "変更する" %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    <% else %>
-      <P class="text-center">承認待ちユーザーはいません。</P>
-    <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+<% else %>
+  <P class="text-center">承認待ちユーザーはいません。</P>
+<% end %>

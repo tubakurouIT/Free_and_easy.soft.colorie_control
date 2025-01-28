@@ -1,14 +1,13 @@
 class Group < ApplicationRecord
   has_many :free_posts, dependent: :destroy
   has_many :group_members, dependent: :destroy
-  belongs_to :owner, class_name: "Member"
+  has_one_attached :group_image
   has_many :members, through: :group_members, source: :member
+  belongs_to :owner, class_name: "Member"
 
   validates :name, presence: true
   validates :introduction, presence: true
-  has_one_attached :group_image
   
-
   def self.search_for(content, method)
     if method == 'perfect'
       Group.where(name: content)
@@ -37,5 +36,6 @@ class Group < ApplicationRecord
   def include_member?(member)
   group_members.exists?(member_id: member.id)
   end
+  
 end
 

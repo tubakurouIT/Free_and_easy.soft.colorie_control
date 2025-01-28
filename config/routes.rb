@@ -25,7 +25,6 @@ Rails.application.routes.draw do
     post "members/guest_sign_in", to: "members/sessions#guest_sign_in"
   end
 
-
   scope module: :public do
     root to: "homes#top"
     get "/search", to: "searches#search"
@@ -46,8 +45,6 @@ Rails.application.routes.draw do
       resource :group_members, only: [:create, :destroy, :update]
     end
   end
-
-  
 
   namespace :admin do
     root "members#index" 

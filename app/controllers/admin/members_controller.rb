@@ -7,7 +7,6 @@ class Admin::MembersController < ApplicationController
     @members = Member.all
   end
 
-
   def show
     @member = Member.find(params[:id])
     @free_posts = @member.free_posts.all
@@ -23,7 +22,5 @@ class Admin::MembersController < ApplicationController
     end
     redirect_to admin_members_path
   end
-
-  
 
 end

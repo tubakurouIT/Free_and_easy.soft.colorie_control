@@ -11,8 +11,6 @@ class Public::GroupsController < ApplicationController
     @free_post = FreePost.new
     @groups = Group.all
     @member = Member.find(current_member.id)
-
-    
   end
 
   def show
@@ -84,4 +82,5 @@ class Public::GroupsController < ApplicationController
       redirect_to groups_path, notice: "ゲストユーザーはグループ機能を使用できません"
     end
   end  
+
 end

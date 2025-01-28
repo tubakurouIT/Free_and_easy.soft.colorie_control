@@ -4,16 +4,15 @@
     <div class="col-md-3">
       <h2>member info</h2>
       <%= render partial: "public/members/info", locals: { member: @member }%>
-
       <%= render partial: "public/free_posts/form", locals: { free_post: @free_post } %>
     </div>
 
     <div class="col-md-8 offset-md-1">
-    <h2 class="text-primary mb-4">Groups</h2>
+      <h2 class="text-primary mb-4">Groups</h2>
       <% unless current_member.email == "guest@example.com" %>
-      <%= link_to "グループを作成する", new_group_path %>
+        <%= link_to "グループを作成する", new_group_path %>
       <% end %>
-      <%= render 'index', groups: @groups %>
+        <%= render 'index', groups: @groups %>
     </div>
 
   </div>

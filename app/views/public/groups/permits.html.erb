@@ -1,37 +1,54 @@
-<div class="container">
-  <h2 class="text-center"><%= @group.name %></h2>
-  <h4 class="text-center">承認待ち一覧</h4>
+<div class="container my-5">
+  <!-- グループ名 -->
+  <h2 class="text-center text-primary fw-bold"><%= @group.name %></h2>
 
-  <div class="row mt-5">
-    <div class="col-11 col-md-12 mx-auto">
-      <%= render 'public/groups/members', group: @group, group_members: @application_group_members %>
+  <!-- 承認待ち一覧 -->
+  <div class="card shadow-sm mt-5">
+    <div class="card-header bg-primary text-white text-center fw-bold">
+      承認待ち一覧
     </div>
-    <div class="mx-auto mt-5"><%= paginate @application_group_members %></div>
-  </div>
-
-  <h4 class="text-center">許可一覧</h4>
-
-  <div class="row mt-5">
-    <div class="col-11 col-md-12 mx-auto">
-      <%= render 'public/groups/members', group: @group, group_members: @permit_group_members %>
+    <div class="card-body">
+      <div class="table-responsive">
+        <%= render 'public/groups/members', group: @group, group_members: @application_group_members %>
+      </div>
     </div>
-    <div class="mx-auto mt-5"><%= paginate @permit_group_members %></div>
-  </div>
-
-  <h4 class="text-center">拒否一覧</h4>
-
-  <div class="row mt-5">
-    <div class="col-11 col-md-12 mx-auto">
-      <%= render 'public/groups/members', group: @group, group_members: @rejection_group_members %>
-    </div>
-    <div class="mx-auto mt-5"><%= paginate @rejection_group_members %></div>
-  </div>
-
-
-  <div class="row mt-5">
-    <div class="col-md-9 mx-auto">
-    <p class="text-center"><%= link_to "戻る", group_path(@group), class: 'text-dark font-weight-bold' %></p>
+    <div class="card-footer text-center">
+      <%= paginate @application_group_members %>
     </div>
   </div>
 
+  <!-- 許可一覧 -->
+  <div class="card shadow-sm mt-5">
+    <div class="card-header bg-success text-white text-center fw-bold">
+      許可一覧
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <%= render 'public/groups/members', group: @group, group_members: @permit_group_members %>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <%= paginate @permit_group_members %>
+    </div>
+  </div>
+
+  <!-- 拒否一覧 -->
+  <div class="card shadow-sm mt-5">
+    <div class="card-header bg-danger text-white text-center fw-bold">
+      拒否一覧
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <%= render 'public/groups/members', group: @group, group_members: @rejection_group_members %>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <%= paginate @rejection_group_members %>
+    </div>
+  </div>
+
+  <!-- 戻るボタン -->
+  <div class="text-center mt-5">
+    <%= link_to "戻る", group_path(@group), class: 'btn btn-outline-primary fw-bold px-4 py-2' %>
+  </div>
 </div>

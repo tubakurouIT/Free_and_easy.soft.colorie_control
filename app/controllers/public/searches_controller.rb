@@ -5,7 +5,7 @@ class Public::SearchesController < ApplicationController
     @model = params[:model]
     @content = params[:content]
     @method = params[:method]
-    
+
     # 選択したモデルに応じて検索を実行
     if @model  == "member"
       @records = Member.search_for(@content, @method)
@@ -15,4 +15,5 @@ class Public::SearchesController < ApplicationController
       @records = Group.search_for(@content, @method)
     end
   end
+  
 end

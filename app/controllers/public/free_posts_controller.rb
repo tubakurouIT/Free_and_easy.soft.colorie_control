@@ -3,7 +3,6 @@ class Public::FreePostsController < ApplicationController
   before_action :is_matching_login_member, except: [:index, :create, :show]
 
   def index
-   
     @free_post = FreePost.new
     @free_posts =FreePost.page(params[:page]).per(7)
     @groups = Group.all
@@ -16,10 +15,7 @@ class Public::FreePostsController < ApplicationController
     @member = @free_post.member
     @free_post_new = FreePost.new
     @comment = Comment.new
-    
   end
-
-
 
   def create
     @free_post =FreePost.new(free_posts_params)
@@ -34,12 +30,9 @@ class Public::FreePostsController < ApplicationController
     end
   end
 
-
   def edit
     @free_post = FreePost.find(params[:id])
   end
-
-  
 
   def update
     @free_post = FreePost.find(params[:id])
@@ -57,6 +50,7 @@ class Public::FreePostsController < ApplicationController
   end
 
   private
+
   def free_posts_params
     params.require(:free_post).permit(:body, :image, :group_id)
   end
@@ -68,4 +62,5 @@ class Public::FreePostsController < ApplicationController
       redirect_to free_posts_path
     end
   end
+  
 end
