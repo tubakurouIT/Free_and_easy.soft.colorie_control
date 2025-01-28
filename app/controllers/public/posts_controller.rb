@@ -45,7 +45,7 @@ class Public::PostsController < ApplicationController
     if @post.update(posts_params)
       redirect_to posts_path, notice: "You have updated book successfully."
     else
-      render "edit"
+      render "public/posts/edit"
     end
   end
 

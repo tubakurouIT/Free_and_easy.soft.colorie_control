@@ -43,7 +43,7 @@
                   <p class="mb-0"><%= @free_post.body %></p>
                 </td>
                 <td class="text-end" style="width: 20%;">
-                  <%= link_to '削除', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-sm btn-danger' %>
+                  <%= link_to '削除', admin_free_post_path(@free_post), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-sm btn-danger' %>
                 </td>
               </tr>
             </tbody>

@@ -16,6 +16,21 @@
   <body>
     <%= render 'layouts/header' %>
     <main>
+    <!-- Flash Message -->
+      <% if flash.now[:notice].present? %>
+      <div class="container my-5">
+        <div class="alert alert-success" >
+          <%= flash.now[:notice] %>
+        </div>
+      </div>
+      <% end %>
+      <% if flash.now[:error].present? %>
+      <div class="container my-5">
+        <div class="alert alert-danger" >
+          <%= flash.now[:error] %>
+        </div>
+      </div>
+      <% end %>
     <%= yield %>
     </main>
     <%= render 'layouts/footer' %>
