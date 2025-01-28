@@ -91,7 +91,7 @@
               <td>
                 <%= link_to group.name, group_path(group), class: "text-decoration-none text-dark fw-bold" %>
               </td>
-              <td><%= group.members.count %></td>
+              <td><%= GroupMember.permit.where(group_id: group.id).count %></td>
               <td>
                 <%= link_to 'Show', group, class: 'btn btn-primary btn-sm' %>
               </td>

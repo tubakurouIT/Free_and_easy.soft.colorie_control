@@ -11,7 +11,7 @@ class Public::CommentsController < ApplicationController
     redirect_to free_post_path(@free_post), notice: "successfully"
   else
 
-    flash[:notice] = "コメントに失敗しました。"
+    flash.now[:error] = "コメントに失敗しました。"
     @member = @free_post.member
     @free_post_new = FreePost.new
     
@@ -34,4 +34,6 @@ class Public::CommentsController < ApplicationController
     params.require(:comment).permit(:comment)
   end
 
+
+  
 end
