@@ -2,7 +2,7 @@
 
 ## サイト概要
 ### サイトテーマ
-日常の中で摂取しているカロリーの可視化（記録）でき、食事に関する情報交換ができるコミュニティーサイト
+日常の中で摂取しているカロリーを可視化（記録）でき、情報交換ができるコミュニティーサイト
 
 ​
 ### テーマを選んだ理由
@@ -26,6 +26,8 @@
 - テーブル定義書 :https://docs.google.com/spreadsheets/d/1P7oiVBjVrCa2FXXYvuxSJqUK95qCkCLHucaLMMSV0C0/edit?gid=0#gid=0
 - アプリケーション詳細設計 :https://docs.google.com/spreadsheets/d/1abOTGWJuLt9E4OSjgTwqf8k_fMADv8hpDcr2D2ujh5E/edit?gid=549108681#gid=549108681
 ​
+- ゲストログインでは使用できる機能が制限されております。
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL

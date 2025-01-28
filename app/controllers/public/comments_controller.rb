@@ -7,17 +7,17 @@ class Public::CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.member_id = current_member.id
     @comment.free_post_id = @free_post.id
-  if @comment.save
-    redirect_to free_post_path(@free_post), notice: "successfully"
-  else
+    if @comment.save
+      redirect_to free_post_path(@free_post), notice: "successfully"
+    else
 
-    flash.now[:error] = "コメントに失敗しました。"
-    @member = @free_post.member
-    @free_post_new = FreePost.new
-    
-    render 'public/free_posts/show'
+      flash.now[:error] = "コメントに失敗しました。"
+      @member = @free_post.member
+      @free_post_new = FreePost.new
+        
+      render 'public/free_posts/show'
   
-  end
+    end
 
   end
 
