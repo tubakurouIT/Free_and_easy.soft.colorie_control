@@ -8,11 +8,15 @@ class Admin::SearchesController < ApplicationController
     @content = params[:content]
     @method = params[:method]
     
-    # 選択したモデルに応じて検索を実行
+    
+    
+   # 選択したモデルに応じて検索を実行
     if @model  == "member"
       @records = Member.search_for(@content, @method)
-    else
+    elsif @model == "free_post"
       @records = FreePost.search_for(@content, @method)
+    else
+      @records = Group.search_for(@content, @method)
     end
   end
 end

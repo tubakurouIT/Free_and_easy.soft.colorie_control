@@ -20,10 +20,11 @@
                 <%= image_tag member.get_profile_image, size: '50x50', class: 'rounded-circle' %>
               </td>
               <td class="text-center">
-                <%= link_to member.name, member_path(member), class: "text-decoration-none text-dark fw-bold" %>
+                <%= link_to member.name, admin_member_path(member), class: "text-decoration-none text-dark fw-bold" %>
               </td>
               <td class="text-center">
-                <%= link_to "削除", admin_member_path(member), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+                <%= link_to "削除", admin_member_path(member), method: :delete, 
+                      data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
               </td>
             </tr>
           <% end %>
@@ -54,19 +55,64 @@
                 <%= image_tag free_post.get_image, size: '50x50', class: 'rounded-circle' %>
               </td>
               <td>
-                <%= link_to free_post.body, free_post_path(free_post), class: "text-decoration-none text-dark" %>
+                <%= link_to free_post.body, admin_free_post_path(free_post), class: "text-decoration-none text-dark" %>
               </td>
               <td class="text-center">
-                <%= link_to free_post.member.name, member_path(free_post.member_id), class: "text-decoration-none text-dark fw-bold" %>
+                <%= link_to free_post.member.name, admin_member_path(free_post.member_id), 
+                      class: "text-decoration-none text-dark fw-bold" %>
               </td>
               <td class="text-center">
-                <%= link_to "#{free_post.comments.count} コメント", free_post_path(free_post.id), class: "btn btn-info btn-sm text-white" %>
-              </td>
-              <td class="text-center">
-                <%= link_to "削除", free_post_path(free_post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+                <%= link_to "削除", admin_free_post_path(free_post), method: :delete, 
+                      data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
               </td>
             </tr>
           <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  <% else %>
+    <div class="text-center mb-4">
+      <h3 class="text-info">Groups search for "<%= @content %>"</h3>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col" class="text-center">Image</th>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">メンバー数</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @records.each do |group| %>
+            <tr>
+              <!-- Group Image -->
+              <td class="text-center">
+                <%= image_tag group.get_group_image, size: "50x50", class: "rounded" %>
+              </td>
+
+              <!-- Group Name -->
+              <td class="text-center">
+                <%= group.name %>
+              </td>
+
+              <!-- Member Count -->
+              <td class="text-center">
+                <%= GroupMember.permit.where(group_id: group.id).count %>
+              </td>
+
+              <!-- Actions -->
+              <td class="text-center">
+                <div class="d-flex gap-2 justify-content-center">
+                  <%= link_to "グループを削除", admin_group_path(group), method: :delete, 
+                        data: { confirm: "本当に削除しても良いですか？" }, class: "btn btn-danger btn-sm" %>
+                </div>
+              </td>
+            </tr>
+         <% end %>
         </tbody>
       </table>
     </div>
