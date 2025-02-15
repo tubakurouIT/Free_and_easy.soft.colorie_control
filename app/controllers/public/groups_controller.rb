@@ -1,7 +1,7 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_member!
   before_action :ensure_correct_member, only: [:edit, :update, :destroy, :permits]
-  before_action :ensure_guest_member, only: [:new, :edit, :create, :update, :destroy]
+  #before_action :ensure_guest_member, only: [:new, :edit, :create, :update, :destroy]
 
   def new
     @group = Group.new
@@ -76,11 +76,11 @@ class Public::GroupsController < ApplicationController
   end
 
 
-  def ensure_guest_member
-    @member = current_member
-    if @member.guest_member?
-      redirect_to groups_path, notice: "ゲストユーザーはグループ機能を使用できません"
-    end
-  end  
+  #def ensure_guest_member
+    #@member = current_member
+    #if @member.guest_member?
+      #redirect_to groups_path, notice: "ゲストユーザーはグループ機能を使用できません"
+    #end
+  #end  
 
 end

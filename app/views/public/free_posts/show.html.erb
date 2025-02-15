@@ -11,9 +11,6 @@
       </div>
 
       <!-- New Free Post Form -->
-      <% unless current_member.email == "guest@example.com" %>
-        <h2 class="text-primary mb-4">New Free Post</h2>
-      <% end %>
       <div class="card shadow-sm">
         <div class="card-body">
           <%= render 'public/free_posts/form', free_post: @free_post_new %>
@@ -38,7 +35,9 @@
                   <% end %>
                 
                 </td>
-                <% unless current_member.email == "guest@example.com" %>
+                <%# ゲストログインに制限をつけるときに利用 %>
+                <%# unless current_member.email == "guest@example.com" %>
+
                   <!-- Post Body -->
                   <td class="align-middle"><%= simple_format(@free_post.body) %></td>
                   <!-- Favorite Button -->
@@ -50,7 +49,9 @@
                       <%= link_to 'Destroy', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %>
                     </td>
                   <% end %>
-                <% end %>
+
+                <%# end %>
+
               </tr>
             </tbody>
           </table>
@@ -96,7 +97,9 @@
       <!-- New Comment Form -->
       <div class="card shadow-sm">
         <div class="card-body">
-        <% unless current_member.email == "guest@example.com" %>
+
+        <%# ゲストログインに制限をつけるときに利用 %>
+        <%# unless current_member.email == "guest@example.com" %>
           <h3 class="text-primary mb-4">コメントを投稿する</h3>
           <%= form_with model: [@free_post, @comment], local: true do |f| %>
             <div class="mb-3">
@@ -106,7 +109,9 @@
               <%= f.submit "送信する", class: "btn btn-primary" %>
             </div>
           <% end %>
-        <% end %>
+
+        <%# end %>
+        
         </div>
       </div>
     </div>

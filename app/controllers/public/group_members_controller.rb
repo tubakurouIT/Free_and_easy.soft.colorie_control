@@ -8,7 +8,6 @@ class Public::GroupMembersController < ApplicationController
   end
 
   def update
-    #@group = Group.find(params[:group_id])
     @group_member = GroupMember.find(params[:group_member_id])
     if @group_member.update(group_member_params)
       flash[:notice] = "success"

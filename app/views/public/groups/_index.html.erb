@@ -1,12 +1,15 @@
 <div class="container my-5">
-  <% unless current_member.email == "guest@example.com" %>
+  <%# ゲストログインに制限をつけるときに利用 %>
+  <%# unless current_member.email == "guest@example.com" %>
+  
     <!-- 検索フォーム -->
     <div class="d-flex justify-content-center mb-4">
       <div class="w-75">
         <%= render "public/searches/form" %>
       </div>
     </div>
-  <% end %>
+
+  <%# end %>
 
 <div class="container my-5">
   <!-- Groups Table -->

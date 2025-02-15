@@ -74,7 +74,7 @@
                       <%= link_to "Edit", edit_group_path(@group), class: "btn btn-sm btn-success" %>
                       <%= link_to "グループを削除", group_path(@group), method: :delete, data: { confirm: "本当に削除しても良いですか？" }, class: "btn btn-sm btn-danger" %>
                     </div>
-                  <% elsif current_member.email != "guest@example.com" %>
+                  <% else %>
                     <% current_group = current_member.group_members.find_by(group_id: @group.id) %>
                     <% if current_group and current_group.status == 'permit' %>
                       <%= link_to 'グループ退出', group_group_members_path(@group), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "本当にグループを退出しますか？" } %>
@@ -82,8 +82,8 @@
                       <%= link_to '申請取消', group_group_members_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
                     <% else %>
                       <%= link_to '加入申請', group_group_members_path(@group), method: :post, class: "btn btn-sm btn-success" %>
-                  <% end %>
-                <% end %>
+                    <% end %>
+                 <% end %>
                 </td>
 
                 <%= render 'public/groups/show', free_posts: @group_free_posts %>

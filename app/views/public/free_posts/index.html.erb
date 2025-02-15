@@ -22,10 +22,14 @@
 
     </div>
     <div class='col-md-8 offset-md-1'>
-      <% unless current_member.email == "guest@example.com" %>
+
+      <%# ゲストログインに制限をつけるときに利用 %>
+      <%# unless current_member.email == "guest@example.com" %>
+
       <h2 class="text-primary mb-4">Free_posts</h2>
       <%= link_to "グループを作成する", new_group_path %>｜<%= link_to "グループ一覧", groups_path %>
-      <% end %>
+      
+      <%# end %>
 
       <%= render 'index', free_posts: @free_posts %>
 
