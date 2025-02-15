@@ -47,7 +47,7 @@
             <%# unless current_member.email == "guest@example.com" %>
 
               <!-- Favorites Button -->
-              <td>
+              <td id= "favorite_btn_<%= free_post.id %>">
                 <%= render "public/favorites/btn", free_post: free_post %>
               </td>
 

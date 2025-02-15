@@ -1,11 +1,11 @@
 
 <% if free_post.favorited_by?(current_member) %>
-  <%= link_to free_post_favorites_path(free_post), method: :delete do %>
+  <%= link_to free_post_favorites_path(free_post), method: :delete, remote: true, data: {"turbolinks" => false} do %>
     <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
     <%= free_post.favorites.count %>いいね
   <% end %>
 <% else %>
-  <%= link_to free_post_favorites_path(free_post), method: :post do %>
+  <%= link_to free_post_favorites_path(free_post), method: :post, remote: true, data: {"turbolinks" => false} do %>
     <i class="fas fa-heart" aria-hidden="true"></i>
     <%= free_post.favorites.count %>いいね
   <% end %>
