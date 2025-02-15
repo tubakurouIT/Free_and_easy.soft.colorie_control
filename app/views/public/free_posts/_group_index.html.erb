@@ -23,7 +23,7 @@
 
             <!-- Group Name -->
             <td>
-              <%= link_to free_post.group.name, groups_path %>
+              <%= link_to free_post.group.name, group_path(free_post.group), class: "text-decoration-none text-dark fw-bold" %>
             </td>
 
             <!-- Free Post Body -->
@@ -33,7 +33,7 @@
 
             <!-- Member Name -->
             <td>
-              <%= link_to free_post.member.name, member_path(free_post.member_id), class: "text-decoration-none text-dark fw-bold" %>
+              <%= link_to free_post.member.name, member_path(free_post.member), class: "text-decoration-none text-dark fw-bold" %>
             </td>
 
             <!-- Favorites Button -->
