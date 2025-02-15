@@ -39,7 +39,7 @@
                 <td>
                   <%= link_to free_post.member.name, member_path(free_post.member_id), class: "text-decoration-none text-dark fw-bold" %>
                 </td>
-                <td>
+                <td id= "favorite_btn_<%= free_post.id %>">
                   <%= render "public/favorites/btn", free_post: free_post %>
                 </td>
                 <td>
