@@ -22,17 +22,15 @@
               <% end %>
             </li>
             
+            <li class="nav-item">
+              <%= link_to free_posts_path, class: 'nav-link text-dark fw-semibold' do %>
+                <i class="fas fa-users"></i> Free Space
+              <% end %>
+            </li>
 
             <li class="nav-item">
               <%= link_to favorites_member_path(current_member), class: 'nav-link text-dark fw-semibold' do %>
                 <i class="fa-solid fa-heart"></i> favorites
-              <% end %>
-            </li>
-
-
-            <li class="nav-item">
-              <%= link_to free_posts_path, class: 'nav-link text-dark fw-semibold' do %>
-                <i class="fas fa-users"></i> Free Space
               <% end %>
             </li>
 
