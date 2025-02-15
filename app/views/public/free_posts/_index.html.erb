@@ -1,12 +1,16 @@
 <div class="container my-5">
-  <% unless current_member.email == "guest@example.com" %>
+
+  <%# ゲストログインに制限をつけるときに利用 %>
+  <%# unless current_member.email == "guest@example.com" %>
+
     <!-- 検索フォーム -->
     <div class="d-flex justify-content-center mb-4">
       <div class="w-75">
         <%= render "public/searches/form" %>
       </div>
     </div>
-  <% end %>
+
+  <%# end %>
 
   <!-- Free Posts Table -->
   <div class="table-responsive">
@@ -39,12 +43,16 @@
               <%= link_to free_post.member.name, member_path(free_post.member_id), class: "text-decoration-none text-dark fw-bold" %>
             </td>
             
-            <% unless current_member.email == "guest@example.com" %>
+            <%# ゲストログインに制限をつけるときに利用 %>
+            <%# unless current_member.email == "guest@example.com" %>
+
               <!-- Favorites Button -->
               <td>
                 <%= render "public/favorites/btn", free_post: free_post %>
               </td>
-            <% end %>
+
+            <%# end %>
+
 
             <!-- Comments -->
             <td>

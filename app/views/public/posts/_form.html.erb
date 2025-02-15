@@ -1,4 +1,6 @@
-<% unless current_member.email == "guest@example.com" %>
+<%# ゲストログインに制限をつけるときに利用 %>
+<%# unless current_member.email == "guest@example.com" %>
+
   <div class="container my-5">
     <!-- New Post Heading -->
     <h2 class="text-primary mb-4">Post</h2>
@@ -36,4 +38,5 @@
       </div>
     </div>
   </div>
-<% end %>
+
+<%# end %>
