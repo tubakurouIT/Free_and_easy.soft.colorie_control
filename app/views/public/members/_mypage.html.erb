@@ -69,41 +69,6 @@
 <!-- Groups Table -->
 <div class="container my-5">
   <h2 class="text-primary mb-4">Groups</h2>
-  <div class="table-responsive">
-    <table class="table table-striped table-hover align-middle">
-      <thead class="table-primary">
-        <tr>
-          <th scope="col">Image</th>
-          <th scope="col">Name</th>
-          <th scope="col">Members</th>
-          <th scope="col" colspan="3">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-      
-        <% groups.each do |group| %>
-          <% group_member = group.group_members.find_by(member_id: current_member.id) %>
-          <% if group_member&.status == 'permit' %>
-            <tr>
-              <td>
-                <%= image_tag group.get_group_image, size: '50x50', class: 'rounded' %>
-              </td>
-              <td>
-                <%= link_to group.name, group_path(group), class: "text-decoration-none text-dark fw-bold" %>
-              </td>
-              <td><%= GroupMember.permit.where(group_id: group.id).count %></td>
-              <td>
-                <%= link_to 'Show', group, class: 'btn btn-primary btn-sm' %>
-              </td>
-            </tr>
-          <% end %>
-        <% end %>
-        <tr>
-          <td colspan="4" class="text-center">
-            <%= link_to "一覧へ", groups_path, class: "btn btn-outline-primary" %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <%= render "public/members/group_members", group_members: permit_group_members %>
 </div>
+

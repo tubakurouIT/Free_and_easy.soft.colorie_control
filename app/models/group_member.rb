@@ -1,4 +1,8 @@
 class GroupMember < ApplicationRecord
+  scope :permit, -> { where(status: :permit) }
+  scope :application, -> { where(status: :application) }
+  scope :rejection, -> { where(status: :rejection) }
+
   belongs_to :member
   belongs_to :group
 

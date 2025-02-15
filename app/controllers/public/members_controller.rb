@@ -14,7 +14,9 @@ class Public::MembersController < ApplicationController
     @posts = current_member.posts.limit(3)
     @free_post = FreePost.new
     @free_posts = current_member.free_posts.limit(3)
-    @groups = current_member.groups.limit(3)
+    #@groups = current_member.groups.limit(3)
+    @permit_group_members = current_member.group_members.permit
+    @application_group_members = current_member.group_members.application
   end
 
 

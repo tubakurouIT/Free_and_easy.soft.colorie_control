@@ -15,7 +15,10 @@
       <%= render 'public/posts/form', post: @post %> 
    </div>
    <div class='col-md-8 offset-md-1'>
-    <%= render 'public/members/mypage',free_posts: @free_posts, posts: @posts, groups: @groups %>
+    <%= render 'public/members/mypage', free_posts: @free_posts,
+                                        posts: @posts,
+                                        groups: @group,
+                                        permit_group_members: @permit_group_members %>
    </div>
   </div>
 </div>
