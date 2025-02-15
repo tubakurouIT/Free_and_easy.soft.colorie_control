@@ -40,8 +40,16 @@
 
                   <!-- Post Body -->
                   <td class="align-middle"><%= simple_format(@free_post.body) %></td>
+
+
                   <!-- Favorite Button -->
-                  <td class="align-middle"><%= render "public/favorites/btn", free_post: @free_post %></td>
+              
+
+                  <td id="favorite_btn_<%= @free_post.id %>" class="align-middle">
+                    <%= render "public/favorites/btn", free_post: @free_post %>
+                  </td>
+
+
                   <!-- Edit/Delete Buttons -->
                   <% if @free_post.member == current_member %>
                     <td class="align-middle text-end">
