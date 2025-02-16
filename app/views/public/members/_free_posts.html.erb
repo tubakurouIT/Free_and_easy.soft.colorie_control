@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col" colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% free_posts.each do |free_post| %>
+        <tr>
+          <td>
+            <%= image_tag free_post.get_image, size: '50x50', class: 'rounded' %>
+          </td>
+          <td><%= free_post.body %></td>
+          <td>
+            <%= link_to 'Show', free_post, class: 'btn btn-primary btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="3" class="text-center">
+          <%= link_to "一覧へ", member_path(current_member), class: "btn btn-outline-primary" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

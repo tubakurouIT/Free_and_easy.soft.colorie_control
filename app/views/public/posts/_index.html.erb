@@ -1,7 +1,7 @@
 <div class="container my-5">
   <!-- Posts Table Heading -->
   <h2 class="text-primary mb-4">Posts</h2>
-
+  <%= link_to '新しい順', posts_path(latest: "true") %>|<%= link_to '古い順', posts_path(old: "true") %>
   <!-- Posts Table -->
   <div class="table-responsive">
     <table class="table table-hover table-bordered">

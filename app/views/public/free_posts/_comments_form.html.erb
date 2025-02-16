@@ -1,0 +1,9 @@
+<%= form_with model: [free_post, comment], local: false do |f| %>
+  <div id="error_messages"></div>
+  <div class="mb-3">
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control", id: 'comments_textarea' %>
+  </div>
+  <div class="text-end">
+    <%= f.submit "送信する", class: "btn btn-primary" %>
+  </div>
+<% end %>

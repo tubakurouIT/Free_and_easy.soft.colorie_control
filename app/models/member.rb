@@ -16,6 +16,9 @@ class Member < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_free_posts, through: :favorites, source: :free_post 
   
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+
   GUEST_MEMBER_EMAIL = "guest@example.com"
 
   def self.guest

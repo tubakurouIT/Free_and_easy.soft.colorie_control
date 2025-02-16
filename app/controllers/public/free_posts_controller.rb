@@ -8,6 +8,15 @@ class Public::FreePostsController < ApplicationController
     @groups = Group.all
     current_member_group_ids = current_member.groups.ids
     @group_free_posts = FreePost.where(group_id: current_member_group_ids).page(params[:group_page]).per(3)
+
+    if params[:latest]
+      @free_posts = FreePost.latest
+    elsif params[:old]
+      @free_posts = FreePost.old
+    else
+      @free_posts = FreePost.all
+    end
+
   end
 
   def show

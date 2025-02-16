@@ -6,6 +6,14 @@ class Public::MembersController < ApplicationController
   def index
     @members = Member.all
     @member = Member.new
+
+    if params[:latest]
+      @members = Member.latest
+    elsif params[:old]
+      @members = Member.old
+    else
+      @members = Member.all
+    end
   end
 
   def mypage
@@ -50,9 +58,15 @@ class Public::MembersController < ApplicationController
 
   def favorites
     @member = Member.find(params[:id])
-    favorites = Favorite.where(member_id: @member.id).pluck(:free_post_id)
-    @favorite_free_posts = FreePost.find(favorites)
+    @favorite_free_posts = FreePost.joins(:favorites).where('favorites.member_id': @member.id)
     @free_post = FreePost.new
+
+    if params[:latest]
+      @favorite_free_posts = @favorite_free_posts.latest
+    elsif params[:old]
+      @favorite_free_posts = @favorite_free_posts.old
+   
+    end
   end
 
   private
