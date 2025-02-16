@@ -11,6 +11,14 @@ class Public::GroupsController < ApplicationController
     @free_post = FreePost.new
     @groups = Group.all
     @member = Member.find(current_member.id)
+
+    if params[:latest]
+      @groups = Group.latest
+    elsif params[:old]
+      @groups = Group.old
+    else
+      @groups = Group.all
+    end
   end
 
   def show

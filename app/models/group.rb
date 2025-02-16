@@ -8,6 +8,9 @@ class Group < ApplicationRecord
   validates :name, presence: true
   validates :introduction, presence: true
   
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+
   def self.search_for(content, method)
     if method == 'perfect'
       Group.where(name: content)

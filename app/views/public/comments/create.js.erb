@@ -1,0 +1,8 @@
+<% if @comment.errors.any? %>
+  $('#error_messages').html("<%=j render 'layouts/errors', obj: @comment %>");
+<% else %>
+  $("#comments_table_body").append("<%=j render 'public/free_posts/comment', comment: @comment %>");
+  $('#comments_textarea').val("");
+  $('#error_messages').text("");
+  $('#comments_counter').text("<%=j @free_post.comments.size %>");
+<% end %>

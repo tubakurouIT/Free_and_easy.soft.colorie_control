@@ -1,0 +1,7 @@
+<table class="table table-bordered">
+  <tbody id="comments_table_body">
+    <% @free_post.comments.each do |comment| %>
+      <%= render 'public/free_posts/comment', comment: comment %>
+    <% end %>
+  </tbody>
+</table>

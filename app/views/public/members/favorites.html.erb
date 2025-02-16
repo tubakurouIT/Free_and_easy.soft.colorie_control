@@ -14,7 +14,7 @@
     <!-- メインコンテンツ -->
     <div class="col-md-8 offset-md-1">
       <h2 class="text-primary mb-4">my favorites</h2>
-
+      <%= link_to '新しい順', favorites_member_path(@member, latest: "true") %>|<%= link_to '古い順', favorites_member_path(@member, old: "true") %>
       <!-- テーブルのラップ -->
       <div class="table-responsive">
         <table class="table table-striped table-hover">

@@ -70,35 +70,8 @@
       <div class="card shadow-sm mb-4">
         <div class="card-body">
           <h3 class="text-primary mb-4">コメント一覧</h3>
-          <p>コメント件数：<%= @free_post.comments.count %></p>
-          <table class="table table-bordered">
-            <tbody>
-            
-              <% @free_post.comments.each do |comment| %>
-                <tr>
-                  <!-- Comment Member Info -->
-                  <td class="text-center align-middle" style="width: 10%;">
-                    <%= link_to member_path(comment.member) do %>
-                      <%= image_tag comment.member.get_profile_image, class: "rounded-circle", size: "50x50" %>
-                    <% end %>
-                  </td>
-                  <!-- Comment Content -->
-                  <td class="align-middle" style="width: 70%;">
-                    <strong><%= comment.member.name %></strong><br>
-                    <small class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d') %></small><br>
-                    <%= simple_format(comment.comment) %>
-                  </td>
-                  <!-- Delete Button -->
-                  <% if comment.member == current_member %>
-                    <td class="text-end align-middle" style="width: 20%;">
-                      <%= link_to "削除", free_post_comment_path(comment.free_post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
-                    </td>
-                  <% end %>
-                </tr>
-              <% end %>
-              
-            </tbody>
-          </table>
+          <%= render "public/free_posts/comments_counter", { free_post: @free_post } %>
+          <%= render "public/free_posts/comments_index", { free_post: @free_post ,comment: @comment } %>
         </div>
       </div>
 
@@ -109,14 +82,8 @@
         <%# ゲストログインに制限をつけるときに利用 %>
         <%# unless current_member.email == "guest@example.com" %>
           <h3 class="text-primary mb-4">コメントを投稿する</h3>
-          <%= form_with model: [@free_post, @comment], local: true do |f| %>
-            <div class="mb-3">
-              <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
-            </div>
-            <div class="text-end">
-              <%= f.submit "送信する", class: "btn btn-primary" %>
-            </div>
-          <% end %>
+          
+        <%= render "public/free_posts/comments_form", { free_post: @free_post ,comment: @comment } %>
 
         <%# end %>
         

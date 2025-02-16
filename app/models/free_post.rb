@@ -2,6 +2,9 @@ class FreePost < ApplicationRecord
   
   validates :body,presence:true,length:{maximum:200}
   
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+
   belongs_to :member
   belongs_to :group, optional: true
   has_many :comments, dependent: :destroy
