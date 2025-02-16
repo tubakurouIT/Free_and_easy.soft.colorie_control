@@ -7,11 +7,11 @@ class Public::PostsController < ApplicationController
     @posts = current_member.posts.all
 
     if params[:latest]
-      @posts = Post.latest
+      @posts = current_member.posts.all.latest
     elsif params[:old]
-      @posts = Post.old
+      @posts = current_member.posts.all.old
     else
-      @posts = Post.all
+      @posts = current_member.posts.all
     end
   end
 
