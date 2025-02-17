@@ -35,9 +35,8 @@ class Group < ApplicationRecord
     owner.id == member.id
   end
 
-
   def include_member?(member)
-  group_members.exists?(member_id: member.id)
+    group_members.exists?(member_id: member.id)
   end
   
 end

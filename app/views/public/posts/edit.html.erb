@@ -1,16 +1,4 @@
 <div class="container my-5">
-  <!-- Error Messages -->
-  <% if @post.errors.any? %>
-    <div class="alert alert-danger">
-      <strong><%= @post.errors.count %>件のエラーが発生しました:</strong>
-      <ul class="mb-0">
-        <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 mx-auto">
       <!-- Editing Post Heading -->

@@ -41,13 +41,10 @@
             
             <!-- Member Count -->
             <td>
-              <% #TODO 練習 %>
+              <% #TODO 参考コード %>
               <%#= group.group_members.permit.count %>
               <%= GroupMember.permit.where(group_id: group.id).count %>
-              
             </td>
-           
-
             <!-- Actions -->
             <td>
               <div class="d-flex gap-2">

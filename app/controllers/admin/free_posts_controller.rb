@@ -2,10 +2,8 @@ class Admin::FreePostsController < ApplicationController
   before_action :authenticate_admin!
   layout 'admin'
 
-
   def index
     @free_posts =FreePost.all
-    
   end
 
   def show

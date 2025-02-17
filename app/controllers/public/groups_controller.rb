@@ -1,6 +1,7 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_member!
   before_action :ensure_correct_member, only: [:edit, :update, :destroy, :permits]
+  #ゲストに制限をつける場合実装
   #before_action :ensure_guest_member, only: [:new, :edit, :create, :update, :destroy]
 
   def new
@@ -62,7 +63,6 @@ class Public::GroupsController < ApplicationController
     end
   end
 
-
   def permits
     @group = Group.find(params[:id])
     @application_group_members = @group.group_members.where(status: 'application').page(params[:page])
@@ -83,7 +83,7 @@ class Public::GroupsController < ApplicationController
     end
   end
 
-
+  #ゲストに制限をつける場合実装
   #def ensure_guest_member
     #@member = current_member
     #if @member.guest_member?

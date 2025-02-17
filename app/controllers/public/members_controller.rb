@@ -28,7 +28,6 @@ class Public::MembersController < ApplicationController
     @application_group_members = current_member.group_members.application
   end
 
-
   def show
     @member = Member.find(params[:id])
     @free_post = FreePost.new
@@ -66,7 +65,6 @@ class Public::MembersController < ApplicationController
       @favorite_free_posts = @favorite_free_posts.latest
     elsif params[:old]
       @favorite_free_posts = @favorite_free_posts.old
-   
     end
   end
 
