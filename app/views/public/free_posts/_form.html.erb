@@ -31,7 +31,7 @@
             <!-- Group Selection -->
             <h6 class="text-primary mt-3">Group</h6>
             <div class="mb-3">
-              <%= f.collection_select :group_id, current_member.groups, :id, :name, { prompt: "選択してください" }, class: "form-control", id: "group_id" %>
+              <%= f.collection_select :group_id, current_member.permit_groups, :id, :name, { prompt: "選択してください" }, class: "form-control", id: "group_id" %>
             </div>
           <% end %>
 
