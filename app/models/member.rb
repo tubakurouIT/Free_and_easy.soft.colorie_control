@@ -77,5 +77,16 @@ class Member < ApplicationRecord
   def favorite?(free_post)
     self.favorite_free_posts.include?(free_post)
   end
+
+  def permit_groups
+    Group.joins(:group_members).where(
+      'group_members.status': :permit,
+      'group_members.member_id': self.id
+    ).or(
+      Group.where(
+        owner_id: self.id
+      )
+    ).distinct
+  end
   
 end
