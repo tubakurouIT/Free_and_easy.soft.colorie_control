@@ -9,6 +9,17 @@
     <!-- Free Post Form -->
     <div class="card shadow-sm">
       <div class="card-body">
+        <% if @free_post.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+                  <%= @free_post.errors.count %>件のエラーが発生
+              <ul>
+                  <% @free_post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+              </ul>
+          </div>
+        <% end %>
+
         <%= form_with model: free_post, local: true do |f| %>
           <!-- Image Input -->
           <div class="mb-3">
