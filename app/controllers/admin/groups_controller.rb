@@ -5,7 +5,6 @@ class Admin::GroupsController < ApplicationController
   def index
     @free_post = FreePost.new
     @groups = Group.all
-    
   end
 
   def destroy

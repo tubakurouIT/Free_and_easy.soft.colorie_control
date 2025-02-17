@@ -8,8 +8,6 @@ class Admin::SearchesController < ApplicationController
     @content = params[:content]
     @method = params[:method]
     
-    
-    
    # 選択したモデルに応じて検索を実行
     if @model  == "member"
       @records = Member.search_for(@content, @method)

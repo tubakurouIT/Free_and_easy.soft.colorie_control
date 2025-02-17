@@ -16,7 +16,6 @@ class Public::FreePostsController < ApplicationController
     else
       @free_posts = FreePost.all
     end
-
   end
 
   def show
