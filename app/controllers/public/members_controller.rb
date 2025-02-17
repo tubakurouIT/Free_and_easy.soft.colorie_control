@@ -6,7 +6,8 @@ class Public::MembersController < ApplicationController
   def index
     @members = Member.all
     @member = Member.new
-
+    @free_post = FreePost.new
+    
     if params[:latest]
       @members = Member.latest
     elsif params[:old]

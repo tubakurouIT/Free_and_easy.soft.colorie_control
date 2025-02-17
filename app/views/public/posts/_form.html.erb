@@ -4,10 +4,23 @@
   <div class="container my-5">
     <!-- New Post Heading -->
     <h2 class="text-primary mb-4">Post</h2>
-
     <!-- New Post Form -->
     <div class="card shadow-sm">
       <div class="card-body">
+
+        
+          <% if @post.errors.any? %>
+            <div class="alert alert-danger" role="alert">
+                  <%= @post.errors.count %>件のエラーが発生
+              <ul>
+                  <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+              </ul>
+            </div>
+          <% end %>
+        
+
         <%= form_with model: post, local: true do |f| %>
           <!-- Title Input -->
           <div class="mb-3">
