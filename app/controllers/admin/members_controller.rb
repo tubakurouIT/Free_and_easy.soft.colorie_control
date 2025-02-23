@@ -4,7 +4,7 @@ class Admin::MembersController < ApplicationController
   layout 'admin'
 
   def index
-    @members = Member.all
+    @members = Member.page(params[:page]).per(9).order(created_at: :desc)
   end
 
   def show

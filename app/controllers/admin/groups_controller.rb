@@ -4,7 +4,7 @@ class Admin::GroupsController < ApplicationController
 
   def index
     @free_post = FreePost.new
-    @groups = Group.all
+    @groups = Group.page(params[:page]).per(9).order(created_at: :desc)
   end
 
   def destroy
