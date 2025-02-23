@@ -5,3 +5,11 @@ ja:
         application: 申請中
         permit: 許可済
         rejection: 拒否
+  activerecord:
+    attributes:
+      group:
+        name: グループ名
+        introduction: 紹介文
+      free_post:
+        
+        
