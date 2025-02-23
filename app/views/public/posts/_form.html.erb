@@ -22,7 +22,7 @@
             <!-- Title Input -->
             <div class="mb-3">
               <%= f.label :title, "Title", class: "form-label text-primary" %>
-              <%= f.text_field :title, class: "form-control post_title", placeholder: "Enter the title" %>
+              <%= f.text_field :title, class: "form-control post_title", placeholder: "max:100" %>
             </div>
 
             <!-- Image Input -->
@@ -32,10 +32,10 @@
             </div>
 
             <!-- Body Input -->
-            <div class="mb-3">
-              <%= f.label :body, "Body", class: "form-label text-primary" %>
-              <%= f.text_area :body, class: "form-control post_body", rows: 5, placeholder: "Write your post content here..." %>
-            </div>
+          <div class="mb-3">
+            <%= f.label :body, "Body", class: "form-label text-primary" %>
+            <%= f.text_area :body, class: "form-control post_body", rows: 10, placeholder: "Please enter within 300 characters", style: "min-height: 150px; max-height: 400px; overflow-y: auto;" %>
+          </div>
 
             <!-- Submit and Delete Buttons -->
             <div class="d-flex gap-2">
