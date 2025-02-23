@@ -24,42 +24,39 @@
       <div class="card shadow-sm mb-4">
         <div class="card-body">
           <h2 class="text-primary mb-4">Free Post Detail</h2>
-          <table class="table table-bordered">
+          <table class="table table-hover align-middle">
             <tbody>
               <tr>
                 <!-- Post Member Info -->
-                <td class="text-center align-middle" style="width: 15%;">
+                <td class="text-center align-middle p-3" style="width: 15%;">
                   <%= link_to(@free_post.member) do %>
-                    <%= image_tag @free_post.member.get_profile_image, class: "img-thumbnail mb-2", size: "100x100" %><br>
+                    <%= image_tag @free_post.member.get_profile_image, style: "width: 100px; height: 100px;", class: "img-thumbnail mb-2" %><br>
                     <strong><%= @free_post.member.name %></strong>
                   <% end %>
-                
                 </td>
-                <%# ゲストログインに制限をつけるときに利用 %>
-                <%# unless current_member.email == "guest@example.com" %>
 
-                  <!-- Post Body -->
-                  <td class="align-middle"><%= simple_format(@free_post.body) %></td>
+                <!-- Post Body -->
+                <td class="align-middle p-3"><%= simple_format(@free_post.body) %></td>
 
+                <!-- created_at Column -->
+                <td class="align-middle p-3">
+                  <%= @free_post.created_at.to_s(:datetime_jp) %>
+                </td>
 
-                  <!-- Favorite Button -->
-              
+                <!-- Favorite Button -->
+                <td id="favorite_btn_<%= @free_post.id %>" class="align-middle text-center p-3">
+                  <%= render "public/favorites/btn", free_post: @free_post %>
+                </td>
 
-                  <td id="favorite_btn_<%= @free_post.id %>" class="align-middle">
-                    <%= render "public/favorites/btn", free_post: @free_post %>
+                <!-- Edit/Delete Buttons -->
+                <% if @free_post.member == current_member %>
+                  <td class="align-middle text-nowrap text-end p-3">
+                    <%= link_to 'Edit', edit_free_post_path(@free_post), class: "btn btn-sm btn-outline-success me-2" %>
+                    <%= link_to 'Destroy', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %>
                   </td>
-
-
-                  <!-- Edit/Delete Buttons -->
-                  <% if @free_post.member == current_member %>
-                    <td class="align-middle text-end">
-                      <%= link_to 'Edit', edit_free_post_path(@free_post), class: "btn btn-sm btn-outline-success me-2" %>
-                      <%= link_to 'Destroy', @free_post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %>
-                    </td>
-                  <% end %>
-
-                <%# end %>
-
+                <% else %>
+                  <td colspan="2"></td>
+                <% end %>
               </tr>
             </tbody>
           </table>
@@ -78,15 +75,8 @@
       <!-- New Comment Form -->
       <div class="card shadow-sm">
         <div class="card-body">
-
-        <%# ゲストログインに制限をつけるときに利用 %>
-        <%# unless current_member.email == "guest@example.com" %>
           <h3 class="text-primary mb-4">コメントを投稿する</h3>
-          
-        <%= render "public/free_posts/comments_form", { free_post: @free_post ,comment: @comment } %>
-
-        <%# end %>
-        
+          <%= render "public/free_posts/comments_form", { free_post: @free_post ,comment: @comment } %>
         </div>
       </div>
     </div>

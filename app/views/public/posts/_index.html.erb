@@ -1,36 +1,39 @@
 <div class="container my-5">
   <!-- Posts Table Heading -->
   <h2 class="text-primary mb-4">Posts</h2>
-  <%= link_to '新しい順', posts_path(latest: "true") %>|<%= link_to '古い順', posts_path(old: "true") %>
+  <div class="text-center mb-3">
+    <%= link_to '新しい順', posts_path(latest: "true"), class: "btn btn-link" %> |
+    <%= link_to '古い順', posts_path(old: "true"), class: "btn btn-link" %>
+  </div>
 
-  
   <!-- Posts Table -->
   <div class="table-responsive">
-    <table class="table table-hover table-bordered" style="table-layout: fixed;">
+    <table class="table table-hover table-bordered text-center" style="table-layout: fixed; width: 100%;">
       <thead class="table-primary">
         <tr>
-          <th scope="col" class="text-center">Image</th>
+          <th scope="col">Image</th>
           <th scope="col">Title</th>
           <th scope="col">Opinion</th>
           <th scope="col">Name</th>
-          <th scope="col" colspan="2" class="text-center">Actions</th>
+          <th scope="col">Create</th>
+          <th scope="col" colspan="2">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% posts.each do |post| %>
           <tr>
             <!-- Image Column -->
-            <td class="text-center align-middle">
+            <td class="align-middle">
               <%= image_tag post.get_image, size: '50x50', class: 'rounded' %>
             </td>
-            
+
             <!-- Title Column -->
-            <td class="align-middle" style="word-break: break-word;>
+            <td class="align-middle text-break">
               <%= link_to post.title, post, class: "text-decoration-none text-primary" %>
             </td>
 
             <!-- Opinion Column -->
-            <td class="align-middle" style="word-break: break-word;">
+            <td class="align-middle text-break">
               <%= truncate(post.body, length: 50) %>
             </td>
 
@@ -39,12 +42,17 @@
               <%= post.member.name %>
             </td>
 
+            <!-- Created At Column -->
+            <td class="align-middle">
+              <%= post.created_at.to_s(:datetime_jp) %>
+            </td>
+
             <!-- Actions Columns -->
             <% if current_member.id == post.member_id %>
-              <td class="text-center align-middle">
+              <td class="align-middle">
                 <%= link_to "編集", edit_post_path(post), class: "btn btn-success btn-sm" %>
               </td>
-              <td class="text-center align-middle">
+              <td class="align-middle">
                 <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "本当に削除しても良いですか？" } %>
               </td>
             <% end %>
