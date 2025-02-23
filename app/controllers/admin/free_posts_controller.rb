@@ -3,7 +3,7 @@ class Admin::FreePostsController < ApplicationController
   layout 'admin'
 
   def index
-    @free_posts =FreePost.all
+    @free_posts =FreePost.page(params[:page]).per(9).order(created_at: :desc)
   end
 
   def show
