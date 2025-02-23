@@ -1,21 +1,20 @@
 <div class="container my-5">
-  <%# ゲストログインに制限をつけるときに利用 %>
-  <%# unless current_member.email == "guest@example.com" %>
-  
-    <!-- 検索フォーム -->
-    <div class="d-flex justify-content-center mb-4">
-      <div class="w-75">
-        <%= render "public/searches/form" %>
-      </div>
+  <!-- 検索フォーム -->
+  <div class="d-flex justify-content-center mb-4">
+    <div class="w-75">
+      <%= render "public/searches/form" %>
     </div>
-    
-  <%# end %>
-
-<div class="container my-5">
+  </div>
+  
+  <!-- ソートリンク -->
+  <div class="text-center mb-3">
+    <%= link_to '新しい順', groups_path(latest: "true"), class: "btn btn-link" %> |
+    <%= link_to '古い順', groups_path(old: "true"), class: "btn btn-link" %>
+  </div>
+  
   <!-- Groups Table -->
   <div class="table-responsive">
-    <%= link_to '新しい順', groups_path(latest: "true") %>|<%= link_to '古い順', groups_path(old: "true") %>
-    <table class="table table-striped table-hover align-middle">
+    <table class="table table-striped table-hover align-middle text-center">
       <thead class="table-primary">
         <tr>
           <th scope="col">Image</th>
@@ -26,7 +25,6 @@
       </thead>
       <tbody>
         <% groups.each do |group| %>
-       
           <tr>
             <!-- Group Image -->
             <td>
@@ -38,23 +36,21 @@
               <%= link_to group.name, group_path(group), class: "text-decoration-none text-dark fw-bold" %>
             </td>
             
-            
             <!-- Member Count -->
             <td>
-              <% #TODO 参考コード %>
-              <%#= group.group_members.permit.count %>
               <%= GroupMember.permit.where(group_id: group.id).count %>
             </td>
+            
             <!-- Actions -->
             <td>
-              <div class="d-flex gap-2">
+              <div class="d-flex justify-content-center gap-2">
                 <!-- Show Link -->
-                <%= link_to "Show", group, class: "btn btn-primary btn-sm group_#{group.id}" %>
+                <%= link_to "Show", group, class: "btn btn-primary btn-sm" %>
                 
                 <% if group.is_owned_by?(current_member) %>
                   <!-- Edit Link -->
-                  <%= link_to "Edit", edit_group_path(group), class: "btn btn-success btn-sm group_#{group.id}" %>
-
+                  <%= link_to "Edit", edit_group_path(group), class: "btn btn-success btn-sm" %>
+                  
                   <!-- Delete Link -->
                   <%= link_to "グループを削除", group_path(group), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "本当に削除しても良いですか？" } %>
                 <% end %>

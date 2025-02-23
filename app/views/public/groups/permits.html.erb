@@ -7,12 +7,12 @@
     <div class="card-header bg-primary text-white text-center fw-bold">
       承認待ち一覧
     </div>
-    <div class="card-body">
+    <div class="card-body p-3">
       <div class="table-responsive">
         <%= render 'public/groups/members', group: @group, group_members: @application_group_members %>
       </div>
     </div>
-    <div class="card-footer text-center">
+    <div class="card-footer text-center bg-light">
       <%= paginate @application_group_members %>
     </div>
   </div>
@@ -22,12 +22,12 @@
     <div class="card-header bg-success text-white text-center fw-bold">
       許可一覧
     </div>
-    <div class="card-body">
+    <div class="card-body p-3">
       <div class="table-responsive">
         <%= render 'public/groups/members', group: @group, group_members: @permit_group_members %>
       </div>
     </div>
-    <div class="card-footer text-center">
+    <div class="card-footer text-center bg-light">
       <%= paginate @permit_group_members %>
     </div>
   </div>
@@ -37,12 +37,12 @@
     <div class="card-header bg-danger text-white text-center fw-bold">
       拒否一覧
     </div>
-    <div class="card-body">
+    <div class="card-body p-3">
       <div class="table-responsive">
         <%= render 'public/groups/members', group: @group, group_members: @rejection_group_members %>
       </div>
     </div>
-    <div class="card-footer text-center">
+    <div class="card-footer text-center bg-light">
       <%= paginate @rejection_group_members %>
     </div>
   </div>

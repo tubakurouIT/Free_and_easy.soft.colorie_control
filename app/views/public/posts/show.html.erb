@@ -52,6 +52,13 @@
                   <p class="text-muted"><%= simple_format(@post.body) %></p>
                 </td>
               </tr>
+              
+              <!-- Create -->
+              <tr>
+                <td class="align-middle">
+                  <%= @post.created_at.to_s(:datetime_jp) %>
+                </td>
+              </tr>
 
               <!-- Edit/Delete Buttons -->
               <% if @post.member == current_member %>

@@ -1,18 +1,17 @@
 <div class="container my-5">
-
-  <%# ゲストログインに制限をつけるときに利用 %>
-  <%# unless current_member.email == "guest@example.com" %>
-
-    <!-- 検索フォーム -->
-    <div class="d-flex justify-content-center mb-4">
-      <div class="w-75">
-        <%= render "public/searches/form" %>
-      </div>
+  <!-- 検索フォーム -->
+  <div class="d-flex justify-content-center mb-4">
+    <div class="w-75 mx-auto">
+      <%= render "public/searches/form" %>
     </div>
+  </div>
 
-    <%= link_to '新しい順', free_posts_path(latest: "true") %>|<%= link_to '古い順', free_posts_path(old: "true") %>
-    
-  <%# end %>
+  <!-- ソートリンク -->
+  <div class="text-center mb-3">
+    <%= link_to '新しい順', free_posts_path(latest: "true"), class: "text-primary fw-bold" %>
+    &nbsp;|&nbsp;
+    <%= link_to '古い順', free_posts_path(old: "true"), class: "text-primary fw-bold" %>
+  </div>
 
   <!-- Free Posts Table -->
   <div class="table-responsive">
@@ -22,53 +21,55 @@
           <th scope="col">Image</th>
           <th scope="col">Free Posts</th>
           <th scope="col">Name</th>
+          <th scope="col">Create</th>
           <th scope="col">Favorites</th>
           <th scope="col">Comments</th>
-          
+          <th scope="col" colspan="2">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% free_posts.each do |free_post| %>
           <tr>
             <!-- Image -->
-            <td>
-              <%= image_tag free_post.get_image, size: '50x50', class: 'rounded' %>
+            <td class="align-middle">
+              <%= image_tag free_post.get_image, style: "width: 50px; height: 50px;", class: "rounded" %>
             </td>
 
             <!-- Post Body -->
-            <td>
+            <td class="align-middle">
               <%= link_to free_post.body, free_post_path(free_post), class: "text-decoration-none text-dark" %>
             </td>
 
             <!-- Member Name -->
-            <td>
+            <td class="align-middle">
               <%= link_to free_post.member.name, member_path(free_post.member_id), class: "text-decoration-none text-dark fw-bold" %>
             </td>
             
-            <%# ゲストログインに制限をつけるときに利用 %>
-            <%# unless current_member.email == "guest@example.com" %>
+            <!-- created_at Column -->
+            <td class="align-middle">
+              <%= free_post.created_at.to_s(:datetime_jp) %>
+            </td>
 
-              <!-- Favorites Button -->
-              <td id= "favorite_btn_<%= free_post.id %>">
-                <%= render "public/favorites/btn", free_post: free_post %>
-              </td>
-
-            <%# end %>
-
+            <!-- Favorites Button -->
+            <td class="align-middle" id="favorite_btn_<%= free_post.id %>">
+              <%= render "public/favorites/btn", free_post: free_post %>
+            </td>
 
             <!-- Comments -->
-            <td>
+            <td class="align-middle">
               <%= link_to "#{free_post.comments.count} コメント", free_post_path(free_post.id), class: "text-decoration-none text-dark" %>
             </td>
 
             <!-- Edit and Delete Actions (Visible only to the post owner) -->
             <% if current_member.id == free_post.member_id %>
-              <td>
+              <td class="align-middle text-nowrap">
                 <%= link_to "編集", edit_free_post_path(free_post), class: "btn btn-success btn-sm" %>
               </td>
-              <td>
+              <td class="align-middle text-nowrap">
                 <%= link_to "削除", free_post_path(free_post), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "本当に削除しても良いですか？" } %>
               </td>
+            <% else %>
+              <td colspan="2"></td>
             <% end %>
           </tr>
         <% end %>
@@ -77,9 +78,9 @@
   </div>
 
   <!-- Pagination -->
-<div class="d-flex justify-content-center mt-4">
-  <% if @free_posts.respond_to?(:total_pages) && @free_posts.total_pages > 1 %>
-    <%= paginate @free_posts %>
-  <% end %>
-</div>
+  <div class="d-flex justify-content-center mt-4">
+    <% if @free_posts.respond_to?(:total_pages) && @free_posts.total_pages > 1 %>
+      <%= paginate @free_posts %>
+    <% end %>
+  </div>
 </div>

@@ -1,20 +1,21 @@
 <div class="container my-5">
-
-  <%# ゲストログインに制限をつけるときに利用 %>
-  <%# unless current_member.email == "guest@example.com" %>
-
-    <!-- 検索フォーム -->
-    <div class="d-flex justify-content-center mb-4">
-      <div class="w-75">
-        <%= render "public/searches/form" %>
-      </div>
+  
+  <!-- 検索フォーム -->
+  <div class="d-flex justify-content-center mb-4">
+    <div class="w-75">
+      <%= render "public/searches/form" %>
     </div>
-    <%= link_to '新しい順', members_path(latest: "true") %>|<%= link_to '古い順', members_path(old: "true") %>
-  <%# end %>
-
+  </div>
+  
+  <!-- ソートリンク -->
+  <div class="text-center mb-3">
+    <%= link_to '新しい順', members_path(latest: "true"), class: "btn btn-link" %> |
+    <%= link_to '古い順', members_path(old: "true"), class: "btn btn-link" %>
+  </div>
+  
   <!-- Members Table -->
   <div class="table-responsive">
-    <table class="table table-striped table-hover align-middle">
+    <table class="table table-striped table-hover align-middle text-center">
       <thead class="table-primary">
         <tr>
           <th scope="col">Image</th>
